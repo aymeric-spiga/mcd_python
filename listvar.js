@@ -51,6 +51,8 @@ document.write('\
 <option value="hydro2"        >[H2] vol. mixing ratio (mol/mol)</option>\
 <option value="e"             >electron number density (cm-3)</option>\
 <option value="ecol"          >Total Electronic Content (TEC) (m-2)</option>\
+<option value="hecol"         >He column (kg/m2)</option>\
+<option value="he"            >[He] vol. mixing ratio (mol/mol)</option>\
 <option value="cp"            >Air heat capacity Cp (J kg-1 K-1)</option>\
 <option value="visc"          >Air viscosity estimation (N s m-2)</option>\
 ');
