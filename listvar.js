@@ -15,6 +15,7 @@ document.write('\
 <option value="icetot"        >Water cloud ice column (kg/m2)</option>\
 <option value="h2ovap"        >Water vapor vol. mixing ratio (mol/mol)</option>\
 <option value="h2oice"        >Water ice mixing ratio (mol/mol)</option>\
+<option value="rice"          >Water ice effective radius (m)</option>\
 <option value="co2ice"        >surface CO2 ice layer (kg/m2)</option>\
 <option value="groundice"     >surface H2O ice layer (kg/m2, 0.5: perennial)</option>\
 <option value="pbl"           >Convective PBL height (m)</option>\
