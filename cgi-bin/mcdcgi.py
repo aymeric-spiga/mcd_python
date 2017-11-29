@@ -85,7 +85,7 @@ else:
   query=mcd.mcd()
 
 # MCD version
-query.toversion5(version="5.2")
+query.toversion5(version="5.3")
 
 ## set MCD version changes if needed
 #try:     betatest = form.getvalue("betatest")
