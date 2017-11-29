@@ -1,0 +1,3 @@
+[submodule "mcd-python"]
+	path = mcd-python
+	url = git@github.com:aymeric-spiga/mcd-python.git

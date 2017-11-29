@@ -1,1 +1,1 @@
-../../../compile_fmcd.sh
+../../mcd-python/compile_fmcd.sh

@@ -1,1 +1,1 @@
-../../../mcdcomp.py
+../../mcd-python/mcdcomp.py
