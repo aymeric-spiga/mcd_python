@@ -122,6 +122,7 @@ else:
     try: query.xdate = float(form.getvalue("julian"))
     except: query.xdate = float(1)
     query.loct = 0.
+    islsfree = 0
 try: query.dust = int(form.getvalue("dust"))
 except: query.dust  = int(1)
 
