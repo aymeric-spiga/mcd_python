@@ -274,6 +274,7 @@ if errormess == "":
  if yeaheps:  figname = '../img/'+reference+'.eps'
  else:        figname = '../img/'+reference+'.png'
  txtname = '../txt/'+reference+'.txt'
+ logname = '../logfile.txt'
  testexist = daos.path.isfile(figname)
 
  # extract data from MCD if needed
@@ -302,7 +303,7 @@ if errormess == "":
 
   ### ASCII file outputs
   if sumfree in [1,2]:
-    query.getascii(vartoplot,filename=txtname)
+    query.getascii(vartoplot,filename=txtname,log=logname)
 
 
 #### NOW WRITE THE HTML PAGE TO USER
