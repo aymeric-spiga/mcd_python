@@ -25,20 +25,36 @@ if __name__ == "__main__":
     dir = "../img/"
     r = random_file(dir)
     #print "Content-type: %s\n" % (content_type(r))
-
     print "Content-type:text/html\n"
     print "  "  #Apache needs a space after content-type
     header="""<html><head><title>Mars Climate Database: The Web Interface</title></head><body>"""
     print header
 
-    print "<form name='diapo' action='./diapo.py' method='post'>"
-    print "<center>"
-    print "<b style='font-size: 125%;'>Mars Climate Database: The Web Interface.</b><br />"
-    print "<b style='font-size: 125%;'>Demo mode!</b>"
-    print "<input type='submit' value='Click here for another random example' style='font-weight:bold'/><br />"
-    print "<a href='../index.html'>back to the main interface.</a><br />"
-    print "</center>"
-    print "<hr />"
+
+    print '''<form name="diapo" action="./diapo.py" method="post">
+<center>
+<b style="font-size: 125%;">Mars Climate Database v5.3: The Web Interface</b><br>
+<img src="../PIA03610_red.jpg" height=80 width=1200><br>
+</center>
+
+<hr />
+<center>
+<input style="font-size: 125%;" type='submit' value='DEMO GALLERY! Click here for a random example' style='font-weight:bold'/><br />
+<a href='../index.html'>back to the main interface.</a><br />
+</center>
+<hr />
+'''
+
+
+
+#    print "<form name='diapo' action='./diapo.py' method='post'>"
+#    print "<center>"
+#    print "<b style='font-size: 125%;'>Mars Climate Database: The Web Interface.</b><br />"
+#    print "<b style='font-size: 125%;'>Demo mode!</b>"
+#    print "<input type='submit' value='Click here for another random example' style='font-weight:bold'/><br />"
+#    print "<a href='../index.html'>back to the main interface.</a><br />"
+#    print "</center>"
+#    print "<hr />"
 
     #dafile = file(dir+r, "rb").read()
     dafile = dir+r
