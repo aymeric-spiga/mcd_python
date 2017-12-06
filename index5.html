@@ -70,12 +70,6 @@ YY / MM / DD @ hh:mm:ss UTC<br />
 <input type="button" value="Use Earth date to calculate Mars Ls" onClick="Convert2Ls();"><br />
 </td>
 <td align="center">
-If longitude is a free dimension, 
-<a href="http://www-mars.lmd.jussieu.fr/mars/time/local_time.html">
-local time</a> value is<br />
-<input type="radio" name="isfixedlt" value="off" checked /> at longitude 0
-<input type="radio" name="isfixedlt" value="on"          /> fixed for the whole planet<br />
-<hr>
 Earth <span style="font-size: 75%;">Julian Date</span> <input type="text" size="10" name="julian" readonly="readonly" style="background-color : #F5DEB3;"><br />
 Mars <span style="font-size: 75%;">MY</span> <input type="text" size="1" name="martianyear" readonly="readonly" style="background-color : #F5DEB3;"> 
  - <span style="font-size: 75%;">MM</span> <input type="text" size="1" name="martianmonth" readonly="readonly" style="background-color : #F5DEB3;"><span style="font-size: 50%;"> / 12</span>
@@ -124,6 +118,10 @@ Mars <span style="font-size: 75%;">MY</span> <input type="text" size="1" name="m
 </span>
 </li>
 -->
+<li>
+Same <a href="http://www-mars.lmd.jussieu.fr/mars/time/local_time.html">local time</a> on range of longitudes
+<input type="radio" name="isfixedlt" value="off" checked /> off
+<input type="radio" name="isfixedlt" value="on"          /> on
 <li>
 <a href="http://www-mars.lmd.jussieu.fr/mars/info_web/index.html#scenarios">Dust/EUV scenario</a> 
 <select name="dust">
