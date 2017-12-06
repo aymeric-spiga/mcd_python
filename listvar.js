@@ -27,6 +27,8 @@ document.write('\
 <option value="ps_ddv"        >Surf. pres. day to day variability (Pa)</option>\
 <option value="p_ddv"         >Pressure day to day variability (Pa)</option>\
 <option value="t_ddv"         >Temperature day to day variability (K)</option>\
+<option value="u_ddv"         >zonal wind day to day variability (m/s)</option>\
+<option value="v_ddv"         >merid. wind day to day variability (m/s)</option>\
 <option value="rho_ddv"       >density day to day variability (kg/m^3)</option>\
 <option value="tau_ddv"       >Dust column day to day variability</option>\
 <option value="tsurfmx"       >daily max mean surf temperature (K)</option>\
