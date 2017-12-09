@@ -4,3 +4,6 @@ click on submit, should return: THIS IS A TEST!
 
 more info about cgi in
 http://docs.python.org/library/cgi.html
+
+to try a server plotting something
+set tryimage to True in cgi-bin/maincgi.py
