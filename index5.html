@@ -67,19 +67,13 @@ Local Time</a>
 YY / MM / DD @ hh:mm:ss UTC<br />
 <input type="text" size="3" name="year"> / <input type="text" size="1" name="month"> / <input type="text" size="1" name="day"> @
 <input type="text" size="1" name="hours">:<input type="text" size="1" name="minutes">:<input type="text" size="1" name="seconds"><br />
+<input type="button" value="Use Earth date to calculate Mars Ls" onClick="Convert2Ls();"><br />
 </td>
 <td align="center">
-If longitude is a free dimension, 
-<a href="http://www-mars.lmd.jussieu.fr/mars/time/local_time.html">
-local time</a> value is<br />
-<input type="radio" name="isfixedlt" value="off" checked /> at longitude 0
-<input type="radio" name="isfixedlt" value="on"          /> fixed for the whole planet<br />
-<hr>
-Earth <span style="font-size: 75%;">Julian Date</span> <input type="text" size="6" name="julian" readonly="readonly" style="background-color : #F5DEB3;"><br />
+Earth <span style="font-size: 75%;">Julian Date</span> <input type="text" size="10" name="julian" readonly="readonly" style="background-color : #F5DEB3;"><br />
 Mars <span style="font-size: 75%;">MY</span> <input type="text" size="1" name="martianyear" readonly="readonly" style="background-color : #F5DEB3;"> 
  - <span style="font-size: 75%;">MM</span> <input type="text" size="1" name="martianmonth" readonly="readonly" style="background-color : #F5DEB3;"><span style="font-size: 50%;"> / 12</span>
  - <span style="font-size: 75%;">sol</span> <input type="text" size="2" name="sol" readonly="readonly" style="background-color : #F5DEB3;"><span style="font-size: 50%;"> / 669</span><br />
-<input type="button" value="EARTH DATE >>> MARS DATE" onClick="Convert2Ls();"><br />
 </td>
 </tr>
 <tr>
@@ -117,6 +111,7 @@ Mars <span style="font-size: 75%;">MY</span> <input type="text" size="1" name="m
 </ul>
 </td>
 <td align="left">
+&nbsp;&nbsp;CUSTOMIZE DATA REQUEST
 <ul>
 <!--
 <li> MCD version
@@ -124,6 +119,10 @@ Mars <span style="font-size: 75%;">MY</span> <input type="text" size="1" name="m
 </span>
 </li>
 -->
+<li>
+Same <a href="http://www-mars.lmd.jussieu.fr/mars/time/local_time.html">local time</a> on range of longitudes
+<input type="radio" name="isfixedlt" value="off" checked /> off
+<input type="radio" name="isfixedlt" value="on"          /> on
 <li>
 <a href="http://www-mars.lmd.jussieu.fr/mars/info_web/index.html#scenarios">Dust/EUV scenario</a> 
 <select name="dust">
@@ -153,11 +152,6 @@ Mars <span style="font-size: 75%;">MY</span> <input type="text" size="1" name="m
 <li> Zonal averaging (only lat/alt plot) 
 <input type="radio" name="zonmean" value="off" checked /> off
 <input type="radio" name="zonmean" value="on"          /> on
-</li>
-<li> Figure format
-<input type="radio" name="dpi" value="80" checked> PNG
-<input type="radio" name="dpi" value="160"> PNG hi-res
-<input type="radio" name="dpi" value="eps"> EPS
 </li>
 </ul>
 </td>
@@ -195,7 +189,13 @@ Variable 4 <select name="var4">
 <script src="listvar.js"></script></select><br />
 </td>
 <td align="left">
+<br>
+&nbsp;&nbsp;CUSTOMIZE FIGURES
 <ul>
+<li> Figure format
+<input type="radio" name="dpi" value="80" checked> PNG
+<input type="radio" name="dpi" value="160"> PNG hi-res
+<input type="radio" name="dpi" value="eps"> EPS
 </li>
 <li>[1D] Log(values)
 <input type="radio" name="islog" value="off" checked /> off
@@ -225,7 +225,7 @@ Variable 4 <select name="var4">
 <!--<option value="robin">map</option>-->
 <!--<option value="laea">laea</option>-->
 </select>
-lat <input type="text" size="1" name="plat"> lon <input type="text" size="1" name="plon">
+proj @ lat <input type="text" size="1" name="plat"> lon <input type="text" size="1" name="plon">
 </li>
 <li> [2D map] Transparency (%) <input type="text" size="1" name="trans"></li>
 <li> [2D map] Wind vectors

@@ -338,7 +338,7 @@ else:
                         print "<a href='"+txtname+"'>Click here to download an ASCII file containing data</a><br />"
                         print "<hr>"
                         if yeaheps:  print "<hr><a href='"+figname+"'>!!!! Click here to download the EPS figure file !!!!</a><br /><hr>"
-                        else:        print "<img src='"+figname+"'><br />"
+                        else:        print "<img src='"+figname+"'><br /><hr>"
 
 ## This is quite common
 bottom = "</body></html>"
