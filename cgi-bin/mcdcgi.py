@@ -1,5 +1,5 @@
-#!/usr/bin/python
-###!/usr/bin/env python
+#!/usr/bin/env python
+##!/usr/bin/python
 ###!/home/aymeric/Software/epd-7.0-2-rh5-x86/bin/python
 ####!/home/marshttp/EPD/epd-7.0-2-rh5-x86_64/bin/python
 ### here the version used to f2py the MCD Fortran routines
@@ -23,6 +23,7 @@ import os as daos
 import matplotlib.pyplot as mpl
 
 import hashlib
+
 
 ### a function to read HTML arguments for coordinates
 def gethtmlcoord(userinput,defmin,defmax):
@@ -268,10 +269,16 @@ if errormess == "":
  ## -- use a MD5 hash for a unique reference which avoids long names
  reference = hashlib.md5(reference).hexdigest()
  ##
- if yeaheps:  figname = '../img/'+reference+'.eps'
- else:        figname = '../img/'+reference+'.png'
- txtname = '../txt/'+reference+'.txt'
- logname = '../logfile.txt'
+ if yeaheps:  fignamered = 'img/'+reference+'.eps'
+ else:        fignamered = 'img/'+reference+'.png'
+ txtnamered = 'txt/'+reference+'.txt'
+ lognamered = 'logfile.txt'
+ ##
+ cwd = daos.getcwd()+'/'
+ figname = cwd+fignamered
+ txtname = cwd+txtnamered
+ logname = cwd+lognamered
+ ##
  testexist = daos.path.isfile(figname)
 
  # extract data from MCD if needed
@@ -332,10 +339,10 @@ if errormess != "":
 else:
   if sumfree == 0: 	query.update() ; query.htmlprinttabextvar(vartoplot)
   elif sumfree >= 1:      
-                        print "<a href='"+txtname+"'>Click here to download an ASCII file containing data</a><br />"
+                        print "<a href='../"+txtnamered+"'>Click here to download an ASCII file containing data</a><br />"
                         print "<hr>"
-                        if yeaheps:  print "<hr><a href='"+figname+"'>!!!! Click here to download the EPS figure file !!!!</a><br /><hr>"
-                        else:        print "<img src='"+figname+"'><br /><hr>"
+                        if yeaheps:  print "<hr><a href='../"+fignamered+"'>!!!! Click here to download the EPS figure file !!!!</a><br /><hr>"
+                        else:        print "<img src='../"+fignamered+"'><br /><hr>"
 
 ## This is quite common
 bottom = "</body></html>"
