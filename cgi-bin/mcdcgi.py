@@ -84,9 +84,6 @@ else:
   from modules import mcd
   query=mcd.mcd()
 
-# MCD version
-query.toversion5(version="5.3")
-
 ## set MCD version changes if needed
 #try:     betatest = form.getvalue("betatest")
 #except:  betatest = "off"
