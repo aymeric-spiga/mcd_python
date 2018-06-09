@@ -1,3 +1,7 @@
 [submodule "mcd-python"]
 	path = mcd-python
 	url = git@github.com:aymeric-spiga/mcd-python.git
+
+[submodule "minimal_cgi_python"]
+	path = minimal_cgi_python
+	url = git@github.com:aymeric-spiga/minimal_cgi_python.git
