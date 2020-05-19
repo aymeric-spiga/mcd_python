@@ -1,4 +1,4 @@
-logfile.txt
+logfile*.txt*
 *.so
 *.log
 *.pyc
