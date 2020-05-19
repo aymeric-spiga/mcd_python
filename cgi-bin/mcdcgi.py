@@ -162,6 +162,10 @@ badalt3 = (isaltfree == 0 and query.zkey == 4 and query.xz > 1500.) \
        or (isaltfree == 1 and query.zkey == 4 and min(query.xzs,query.xze) > 1500.)
 if badalt3: 
     errormess = errormess+"<li>Pressure values larger than 1500 Pa are unlikely to be encountered in the Martian atmosphere."
+badalt4 = (isaltfree == 0 and query.zkey == 1 and query.xz <= 3390000.) \
+       or (isaltfree == 1 and query.zkey == 1 and min(query.xzs,query.xze) <= 3390000.)
+if badalt4:
+    errormess = errormess+"<li>Vertical coordinates must be above Mars radius (about 3390 km) when requesting altitude above Mars center."
 badrange = (isloctfree == 1 and query.locts == query.locte) \
         or (islatfree == 1 and query.lats == query.late) \
         or (islonfree == 1 and query.lons == query.lone) \
