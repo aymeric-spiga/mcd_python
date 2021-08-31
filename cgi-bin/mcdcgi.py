@@ -1,8 +1,9 @@
 #!/usr/bin/python
 ##!/usr/bin/env python
-###!/home/aymeric/Software/epd-7.0-2-rh5-x86/bin/python
-####!/home/marshttp/EPD/epd-7.0-2-rh5-x86_64/bin/python
-### here the version used to f2py the MCD Fortran routines
+###
+### line1 is for web server
+### line2 is for local web server (dev)
+### should be the version used to f2py the MCD Fortran routines
 
 ##################################################
 ### A Python CGI for the Mars Climate Database ###
