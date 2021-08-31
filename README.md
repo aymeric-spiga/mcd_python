@@ -10,5 +10,10 @@ to get submodule mcd-python
 
 --- instructions
 
-compile MCD with fmcd_compile.sh in cgi-bin/modules
+* get MCD sources and data somewhere
+* (if needed) compile netCDF in netcdf/
+* adapt the header of fmcd_compile.sh in cgi-bin/modules
+* compile MCD with fmcd_compile.sh in cgi-bin/modules
+* start a server (where index.html is) with one of the script in minimal_cgi_python
+* visit localhost:8080 with local browser
 
