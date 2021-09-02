@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/env python
+##!/usr/bin/python
 ##!/usr/bin/env python
 ###
 ### line1 is for web server
@@ -21,7 +22,10 @@ from modules import *
 
 import cStringIO
 import os as daos
-import matplotlib.pyplot as mpl
+#import matplotlib.pyplot as mpl
+import matplotlib
+matplotlib.use('TkAgg')
+
 
 import hashlib
 
@@ -255,11 +259,9 @@ if isfixedlt == "on": query.fixedlt=True
 else:                 query.fixedlt=False  
 ######
 ## we could be reading average (as we read all)
-iszonmean = form.getvalue("zonmean")
-query.averaging=None
-if iszonmean  == "on": query.averaging="lon"                 
-isdiumean = form.getvalue("diumean")
-if isdiumean  == "on": query.averaging="loct"
+averaging = form.getvalue("averaging")
+if averaging == "off": query.averaging=None
+else: query.averaging=averaging
 ######
 islog = form.getvalue("islog")
 if islog  == "on": query.islog=True
@@ -269,7 +271,7 @@ else:              query.islog=False
 if errormess == "":
 
  # reference name (to test which figures are already in the database)
- try: reference = query.getnameset()+str(var1)+str(var2)+str(var3)+str(var4)+str(iswind)+str(isfixedlt)+str(iszonmean)+str(isdiumean)+query.colorm+str(query.min2d)+str(query.max2d)+str(query.dpi)+str(islog)+str(proj)+str(query.trans)+str(query.plat)+str(query.plon)+strpoint
+ try: reference = query.getnameset()+str(var1)+str(var2)+str(var3)+str(var4)+str(iswind)+str(isfixedlt)+averaging+query.colorm+str(query.min2d)+str(query.max2d)+str(query.dpi)+str(islog)+str(proj)+str(query.trans)+str(query.plat)+str(query.plon)+strpoint
  except: reference = "test"
  if dev == "on": reference = 'dev_'+reference
  ## -- use a MD5 hash for a unique reference which avoids long names
