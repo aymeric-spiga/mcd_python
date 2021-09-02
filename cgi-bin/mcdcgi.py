@@ -129,9 +129,6 @@ except: query.dust  = int(1)
 badinterv = (islatfree == -1) or (islonfree == -1) or (isloctfree == -1) or (isaltfree == -1) or (islsfree == -1)
 if badinterv: 
     errormess = errormess+"<li>Bad syntax. Write a value (or) a range val1 val2 (or) 'all'. Separator shall be either ; : , / _ space"
-badhovmoller = (islsfree == 1 and isloctfree == 1)
-if badhovmoller:
-    errormess = errormess+"<li>Solar longitude and Local time cannot be both free dimensions (not supported)."
 badls = (islsfree == 0 and query.datekey == 1 and (query.xdate < 0. or query.xdate > 360.) and not (query.xdate == 666)) \
      or (islsfree == 1 and (query.xdates > 360. or query.xdatee > 360.)) \
      or (islsfree == 1 and (query.xdates < 0. or query.xdatee < 0.)) 
@@ -256,10 +253,14 @@ else:              iswindlog = False
 isfixedlt = form.getvalue("isfixedlt")
 if isfixedlt == "on": query.fixedlt=True
 else:                 query.fixedlt=False  
+######
+## we could be reading average (as we read all)
 iszonmean = form.getvalue("zonmean")
-if iszonmean  == "on": query.zonmean=True
-else:                  query.zonmean=False
-
+query.averaging=None
+if iszonmean  == "on": query.averaging="lon"                 
+isdiumean = form.getvalue("diumean")
+if isdiumean  == "on": query.averaging="loct"
+######
 islog = form.getvalue("islog")
 if islog  == "on": query.islog=True
 else:              query.islog=False
@@ -268,7 +269,7 @@ else:              query.islog=False
 if errormess == "":
 
  # reference name (to test which figures are already in the database)
- try: reference = query.getnameset()+str(var1)+str(var2)+str(var3)+str(var4)+str(iswind)+str(isfixedlt)+str(iszonmean)+query.colorm+str(query.min2d)+str(query.max2d)+str(query.dpi)+str(islog)+str(proj)+str(query.trans)+str(query.plat)+str(query.plon)+strpoint
+ try: reference = query.getnameset()+str(var1)+str(var2)+str(var3)+str(var4)+str(iswind)+str(isfixedlt)+str(iszonmean)+str(isdiumean)+query.colorm+str(query.min2d)+str(query.max2d)+str(query.dpi)+str(islog)+str(proj)+str(query.trans)+str(query.plat)+str(query.plon)+strpoint
  except: reference = "test"
  if dev == "on": reference = 'dev_'+reference
  ## -- use a MD5 hash for a unique reference which avoids long names
