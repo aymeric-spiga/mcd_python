@@ -51,7 +51,7 @@ var bissextil; // bissextil year ? (0==no, 1==yes) (returned value)
 var val=document.calendar.year.value;
 
 while ((val!=Math.round(val))||(val<1800)||(val>=2200)) {
-  val=prompt("Year must be an integer between 1800 and 2200\n (domain of validity of julian date computations in the MCD)",Math.round(val));
+  val=prompt("Year must be an integer between 1800 and 2200\n (domain of validity of julian date computations in the VCD)",Math.round(val));
 }
 
 document.calendar.year.value=val;
@@ -266,64 +266,56 @@ document.calendar.julian.value=jdate;
 function Convert2Ls(){
 // Convert a Julian date to corresponding "sol" and "Ls"
 var jdate;
-var sol;
+var day;
 var ls;
-var martianyear;
+var year_day;
 var martianmonth;
 
-var jdate_ref=2.442765667e6; // 19/12/1975 4:00:00, such that Ls=0
-// jdate_ref is also the begining of Martian Year "12"
-var martianyear_ref=12;
+var jdate_ref=2.458994458e6; // julian date for 24-05-2020 at 23:00:00, at which Ls=0.0
 var earthday=86400.0;
-var marsday=88775.245;
-var marsyear=668.60; // number of sols in a martian year 
+var venusday=10087200.0;
+var venusyear=19411229.0; // number of sols in a martian year 
 
 // Start by converting given date to Julian date
+
 Convert2Julian();
 
 // Convert julian days to sol date
 jdate=document.calendar.julian.value;
 
-sol=(jdate-jdate_ref)*earthday/marsday;
+day=(jdate-jdate_ref)*earthday/venusday;
 
-martianyear=martianyear_ref;
-// Compute Martian Year #, along with sol value
-// sol being computed modulo the number of sols in a martian year
-while (sol>=marsyear){
-  sol=sol-marsyear;
-  martianyear=martianyear+1;
-}
-while (sol<0.0){
-  sol=sol+marsyear;
-  martianyear=martianyear-1;
+year_day=venusyear/venusday;
+
+while (day<0.0){
+  day=day+year_day;
 }
 
 //document.dummy.dummy1.value=sol;
 
 // convert sol number to Ls
-ls=Sol2Ls(sol);
+ls=Day2Ls(day);
 
-// Knowing Ls compute martian month
-martianmonth=1+Math.floor(ls/30.);
 
 //Display value with a maximum of 2 decimal digits
-document.calendar.martianyear.value=martianyear;
-document.calendar.martianmonth.value=martianmonth;
 document.calendar.ls.value=Math.round(ls*10)/10;
-//document.calendar.sol.value=Math.round(sol*10)/10;
-document.calendar.sol.value=1+Math.floor(sol);
 }
 
 /*--------------------------------------------------------------------------*/
 
-function Sol2Ls(sol) {
-var sol;
+function Day2Ls(day) {
+var day;
 var ls;
 
-var year_day=668.6; // number of sols in a martian year
-var peri_day=485.35; // perihelion date
-var e_ellip=0.09340; // orbital ecentricity
-var timeperi=1.90258341759902 // 2*Pi*(1-Ls(perihelion)/360); Ls(perihelion)=250.99
+
+
+var venusday  = 10087200.0
+var venusyear = 19411229.0
+var year_day  = venusyear/venusday
+var peri_day  = 1.36042707589817
+var e_ellip   = 0.00678
+var timeperi  = 1.85353966561798
+
 var rad2deg=180./Math.PI;
 
 var i;
@@ -331,7 +323,8 @@ var zz,zanom,zdx=10;
 var xref,zx0,zteta;
 // xref: mean anomaly, zx0: eccentric anomaly, zteta: true anomaly
 
-zz=(sol-peri_day)/year_day;
+
+zz=(day-peri_day)/year_day;
 zanom=2.*Math.PI*(zz-Math.round(zz));
 xref=Math.abs(zanom);
 

@@ -7,18 +7,17 @@
 ### should be the version used to f2py the MCD Fortran routines
 
 ##################################################
-### A Python CGI for the Mars Climate Database ###
+### A Python CGI for the Venus Climate Database ###
 ### ------------------------------------------ ###
-### Aymeric SPIGA 18-19/04/2012 ~ 11/08/2012   ###
+### Thomas Pierron 13/10/2021                  ###
 ### ------------------------------------------ ###
 ### (see mcdtest.py for examples of use)       ###
 ##################################################
-### ajouts et corrections par Franck Guyon 09/2012
-### ajouts suite a brainstorm equipe AS 10/2012
 
 import cgi, cgitb 
 import numpy as np
 from modules import *
+from modules import fvcd
 
 import cStringIO
 import os as daos
@@ -69,6 +68,16 @@ def gethtmlcoord(userinput,defmin,defmax):
    # return values
    return isfree, val, vals, vale
 
+######################################## MAIN PROGRAM ###########################################
+#Optimization concerns
+import time    
+start_time = time.clock()
+
+### INITIALIZE THE HTML PAGE FOR APACHE
+print "Content-type:text/html\n"
+print "  "  #Apache needs a space after content-type
+
+
 # set an errormess variable which must stay to None for interface to proceed
 errormess = ""
 
@@ -78,7 +87,7 @@ cgitb.enable()
 # Create instance of FieldStorage 
 form = cgi.FieldStorage() 
 
-# create a MCD object
+# create a VCD object
 # -- use in-code import to choose 
 # --  between official and dev versions 
 try:    dev = form.getvalue("dev")
@@ -87,23 +96,17 @@ if dev == "on":
   from modules import mcd_dev
   query=mcd_dev.mcd()
 else:
-  from modules import mcd
-  query=mcd.mcd()
+  from modules import vcd
+  query=vcd.vcd_class()
 
-## set MCD version changes if needed
-#try:     betatest = form.getvalue("betatest")
-#except:  betatest = "off"
-#if betatest == "on": query.toversion5(version="5.2")
-#else: query.toversion5(version="5.1")
 
 # Get the kind of vertical coordinates and choose default behavior for "all"
 try: query.zkey = int(form.getvalue("zkey"))
 except: query.zkey = int(3)
-if query.zkey == 2:    minxz = -5000.   ; maxxz = 150000.
-elif query.zkey == 3:  minxz = 0.       ; maxxz = 250000.
-elif query.zkey == 5:  minxz = -5000.   ; maxxz = 150000.
-elif query.zkey == 4:  minxz = 1.e3     ; maxxz = 1.e-6
-elif query.zkey == 1:  minxz = 3396000. ; maxxz = 3596000.
+if query.zkey == 0:    minxz = 1.e7    ; maxxz = 1.e-6
+elif query.zkey == 1:  minxz = 6051848. ; maxxz = 6301848.
+elif query.zkey == 2:  minxz = -5000.   ; maxxz = 250000.
+elif query.zkey == 3:  minxz = 0.        ; maxxz = 250000.
 
 # Get data from user-defined fields and define free dimensions
 getlat = form.getvalue("latitude")
@@ -113,37 +116,42 @@ if getlat is None:
 else:
   islatfree,  query.lat,  query.lats,  query.late  = gethtmlcoord( getlat,   -90.,  90. )
 islonfree,  query.lon,  query.lons,  query.lone  = gethtmlcoord( form.getvalue("longitude"), -180., 180. )
-isloctfree, query.loct, query.locts, query.locte = gethtmlcoord( form.getvalue("localtime"),    0.,  24. )
 isaltfree,  query.xz,   query.xzs,   query.xze   = gethtmlcoord( form.getvalue("altitude"),  minxz, maxxz)
 if minxz < 0.1: minxz=0.1 # otherwise bug with values smaller than 0.1m
 
 try: query.datekey = int(form.getvalue("datekeyhtml"))
 except: query.datekey = float(1)
 if query.datekey == 1:
-    islsfree, query.xdate, query.xdates,  query.xdatee  = gethtmlcoord( form.getvalue("ls"), 0., 360. )
+    isloctfree, query.loct, query.locts, query.locte = gethtmlcoord( form.getvalue("localtime"),    0.,  24. )
 else:
     try: query.xdate = float(form.getvalue("julian"))
     except: query.xdate = float(1)
     query.loct = 0.
-    islsfree = 0
-try: query.dust = int(form.getvalue("dust"))
-except: query.dust  = int(1)
+    isloctfree = 0
+
+try: query.scena = int(form.getvalue("scena"))
+except: query.scena  = int(1)
+
+if query.scena != 7:
+    query.varE107  = 0.
+else:
+   try: query.varE107 = float(form.getvalue("varE107"))
+   except: query.varE107  = float(200)
+
+
+
 
 # Prevent the user from doing bad
-badinterv = (islatfree == -1) or (islonfree == -1) or (isloctfree == -1) or (isaltfree == -1) or (islsfree == -1)
+badinterv = (islatfree == -1) or (islonfree == -1) or (isloctfree == -1) or (isaltfree == -1) 
 if badinterv: 
     errormess = errormess+"<li>Bad syntax. Write a value (or) a range val1 val2 (or) 'all'. Separator shall be either ; : , / _ space"
-badls = (islsfree == 0 and query.datekey == 1 and (query.xdate < 0. or query.xdate > 360.) and not (query.xdate == 666)) \
-     or (islsfree == 1 and (query.xdates > 360. or query.xdatee > 360.)) \
-     or (islsfree == 1 and (query.xdates < 0. or query.xdatee < 0.)) 
-if badls: 
-    errormess = errormess+"<li>Solar longitude must be between 0. (northern spring) and 360."
-badloct = (isloctfree == 0 and query.loct > 24.) \
+badloct = (isloctfree == 0 and query.datekey == 1 and (query.loct < 0. or query.loct > 24.) and not (query.loct == 666)) \
+       or (isloctfree == 0 and query.loct > 24.) \
        or (isloctfree == 1 and (query.locts > 24. or query.locte > 24.)) \
        or (isloctfree == 0 and query.loct < 0.) \
        or (isloctfree == 1 and (query.locts < 0. or query.locte < 0.))
 if badloct: 
-    errormess = errormess+"<li>Local time must be less than 24 martian hours (and not a negative number)."
+    errormess = errormess+"<li>Local time must be less than 24 venusian hours (and not a negative number)."
 badlat = (islatfree == 0 and abs(query.lat) > 90.) \
       or (islatfree == 1 and (abs(query.lats) > 90. or abs(query.late) > 90.))
 if badlat: 
@@ -156,40 +164,36 @@ badalt = (isaltfree == 0 and (query.zkey in [3]) and query.xz < 0.) \
       or (isaltfree == 1 and (query.zkey in [3]) and (query.xzs < 0. or query.xze < 0.))
 if badalt: 
     errormess = errormess+"<li>Vertical coordinates must be positive when requesting altitude above surface."
-badalt2 = (isaltfree == 0 and (query.zkey in [1,4]) and query.xz <= 0.) \
-      or (isaltfree == 1 and (query.zkey in [1,4]) and (query.xzs <= 0. or query.xze <= 0.))
+badalt2 = (isaltfree == 0 and (query.zkey in [0,1]) and query.xz <= 0.) \
+      or (isaltfree == 1 and (query.zkey in [0,1]) and (query.xzs <= 0. or query.xze <= 0.))
 if badalt2: 
-    errormess = errormess+"<li>Vertical coordinates must be <b>strictly</b> positive when requesting pressure levels or altitude above Mars center."
-badalt3 = (isaltfree == 0 and query.zkey == 4 and query.xz > 1500.) \
-       or (isaltfree == 1 and query.zkey == 4 and min(query.xzs,query.xze) > 1500.)
+    errormess = errormess+"<li>Vertical coordinates must be <b>strictly</b> positive when requesting pressure levels or altitude above Venus center."
+badalt3 = (isaltfree == 0 and query.zkey == 0 and query.xz > 1.2e7) \
+       or (isaltfree == 1 and query.zkey == 0 and min(query.xzs,query.xze) > 1.2e7)
 if badalt3: 
-    errormess = errormess+"<li>Pressure values larger than 1500 Pa are unlikely to be encountered in the Martian atmosphere."
-badalt4 = (isaltfree == 0 and query.zkey == 1 and query.xz <= 3390000.) \
-       or (isaltfree == 1 and query.zkey == 1 and min(query.xzs,query.xze) <= 3390000.)
+    errormess = errormess+"<li>Pressure values larger than 1.2*10^7 Pa are unlikely to be encountered in the Venusian atmosphere."
+badalt4 = (isaltfree == 0 and query.zkey == 1 and query.xz <= 6051800.) \
+       or (isaltfree == 1 and query.zkey == 1 and min(query.xzs,query.xze) <= 6051800.)
 if badalt4:
-    errormess = errormess+"<li>Vertical coordinates must be above Mars radius (about 3390 km) when requesting altitude above Mars center."
+    errormess = errormess+"<li>Vertical coordinates must be above Venus radius (about 6052 km) when requesting altitude above Venus center."
 badrange = (isloctfree == 1 and query.locts == query.locte) \
         or (islatfree == 1 and query.lats == query.late) \
         or (islonfree == 1 and query.lons == query.lone) \
         or (isaltfree == 1 and query.xzs == query.xze)
 if badrange: 
     errormess = errormess+"<li>One or several coordinate intervals are not... intervals. Set either a real range or an unique value."
-stormls = ( (query.dust in [4,5,6]) and (query.datekey == 1 and query.xdate < 180.))
-if stormls:
-    errormess = errormess+"<li>When a dust storm scenario is selected, available dates must be within the dust storm season (180 < Ls < 360)."
-if query.xdate == 666.:
-    errormess = "<li>CONGRATULATIONS! <br><img src='../surprise.jpg'><br> You reached secret mode.<br> You can <a href='http://www.youtube.com/watch?v=fTpQOZcNASw'>watch a nice video</a>."
+
+if query.loct == 666.:
+    errormess = "<li>CONGRATULATIONS! <br><img src='../surprise.jpg'><br> You reached secret mode.<br> You can <a href='https://www.youtube.com/watch?v=L930yWCmQnE'>watch a nice video</a>."
 
 # Get how many free dimensions we have
-sumfree = islatfree + islonfree + isloctfree + isaltfree + islsfree
+sumfree = islatfree + islonfree + isloctfree + isaltfree
 if sumfree >= 3: errormess = errormess + "<li>3 or more free dimensions are set... but only 1D and 2D plots are supported!"
 
 # Get additional parameters
 try: query.hrkey = int(form.getvalue("hrkey"))
 except: query.hrkey = int(0)
-#        self.perturkey = 0  #integer perturkey ! perturbation type (0: none)
-#        self.seedin    = 1  #random number generator seed (unused if perturkey=0)
-#        self.gwlength  = 0. #gravity Wave wavelength (unused if perturkey=0)
+
 try: query.colorm = form.getvalue("colorm")
 except: query.colorm = "jet"
 
@@ -271,7 +275,7 @@ else:              query.islog=False
 if errormess == "":
 
  # reference name (to test which figures are already in the database)
- try: reference = query.getnameset()+str(var1)+str(var2)+str(var3)+str(var4)+str(iswind)+str(isfixedlt)+averaging+query.colorm+str(query.min2d)+str(query.max2d)+str(query.dpi)+str(islog)+str(proj)+str(query.trans)+str(query.plat)+str(query.plon)+strpoint
+ try: reference = query.getnameset()+str(var1)+str(var2)+str(var3)+str(var4)+str(iswind)+str(isfixedlt)+averaging+query.colorm+str(query.min2d)+str(query.max2d)+str(query.dpi)+str(islog)+str(proj)+str(query.trans)+str(query.plat)+str(query.plon)+strpoint+str(query.varE107)
  except: reference = "test"
  if dev == "on": reference = 'dev_'+reference
  ## -- use a MD5 hash for a unique reference which avoids long names
@@ -320,15 +324,11 @@ if errormess == "":
 
 #### NOW WRITE THE HTML PAGE TO USER
 
-## This is quite common
-print "Content-type:text/html\n"
-print "  "  #Apache needs a space after content-type
-
 #entete="""<?xml version="1.0" encoding="UTF-8"?> 
 #<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" "http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd">
 #<html xmlns="http://www.w3.org/1999/xhtml"> """
 
-header="""<html><head><title>Mars Climate Database: The Web Interface</title></head><body>"""
+header="""<html><head><title>Venus Climate Database v"""+fvcd.dataver+""": The Web Interface</title></head><body>"""
 #if betatest == "on": 
 #    print "<b>!!! THIS IS A BETA VERSION. RESULTS ARE NOT VALIDATED !!!</b>"
 #    if sumfree == 2:     print "<br>"
@@ -336,6 +336,12 @@ header="""<html><head><title>Mars Climate Database: The Web Interface</title></h
 print header
 #print query.printset()
 #print "<br />"
+
+#Optimization concerns
+print "<br />"
+print "fixedlt=",query.fixedlt
+print " Computing time=",time.clock()-start_time,"seconds"
+print "<br />"
 
 ## Now the part which differs
 if errormess != "":

@@ -1,117 +1,228 @@
-<!-- Author Aymeric Spiga LMD -->
+<!-- Author Thomas Pierron LMD -->
 <!DOCTYPE html>
 <html>
 
 <head>
 <meta charset="utf-8" />
-<title>Mars Climate Database v5.3: The Web Interface</title>
-<script language="JavaScript" type="text/JavaScript" src="martian_time.js"></script>
+<title>Venus Climate Database v1.1: The Web Interface</title>
+<script language="JavaScript" type="text/JavaScript" src="venusian_time.js"></script>
+<!--<link rel="stylesheet" type="text/css" href="index_dark_testcss.css" />-->
+    <style>
+       
+       .titre1{
+        background-color: #deeaf5;
+        color: #032748;
+      }
+      
+       .titre2{
+        background-color: #deeaf5;
+        color: #215b92;
+      }     
+      
+       .main_font{
+        background-color: #deeaf5;
+        color: black;
+      }  
+      
+      .earth {
+        background-color: #deeaf5;
+        color: #309692;
+      } 
+      
+      .button_c {
+        background-color: #215b92;
+        color: white;
+      }       
+      
+      .button_earth {
+        background-color: #309692;
+        color: white;
+      } 
+      
+      .display_earth {
+        background-color: #deeaf5;
+        color:#309692;
+      }      
+      
+      .display_venus {
+        background-color:#deeaf5 ;
+        color: #215b92;
+      }       
+            
+      .dark1 {
+        background-color: black;
+        color: #a1b9d1;
+      }
+      
+      .dark2 {
+        background-color: black;
+        color: #c9d8e7;
+      }  
+       .main_dark{
+      
+        background-color: black;
+        color: white;
+      }     
+      
+      .dark_earth {
+        background-color: black;
+        color: #8ECFC9;
+      }        
+
+      .button_dark {
+        background-color: #c9d8e7;
+        color: black;
+      }
+      
+      .button_earth_dark {
+        background-color: #8ECFC9;
+        color: black;
+      }
+
+      .display_earth_dark {
+        background-color: black;
+        color:#8ECFC9;
+      }      
+      
+      .display_venus_dark {
+        background-color: black;
+        color: #c9d8e7;
+      }	
+	
+      }       
+          
+      
+    </style>
 </head>
 
-<body onload="DefaultDateValues();DefaultTimeValues();Convert2Ls();PlaceValues('all','all');DefaultSpaceTime()">
+<body onload="displayEUV();DefaultDateValues();DefaultTimeValues();Convert2Ls();PlaceValues('all','all');DefaultSpaceTime()", class='titre1'>
+
+<div><button onclick="darkMode()" class='button_c'>Darkmode</button></div>
+    
+    <script>
+      function darkMode() {
+            
+	for (let i = 0; i < document.getElementsByClassName('titre1').length; i++) {
+ 
+        document.getElementsByClassName('titre1')[i].classList.toggle("dark1");
+	}
+	
+	for (let i = 0; i < document.getElementsByClassName('titre2').length; i++) {
+ 
+        document.getElementsByClassName('titre2')[i].classList.toggle("dark2");
+	} 
+	
+	for (let i = 0; i < document.getElementsByClassName('main_font').length; i++) {
+ 
+        document.getElementsByClassName('main_font')[i].classList.toggle("main_dark");
+	}
+
+	for (let i = 0; i < document.getElementsByClassName('earth').length; i++) {
+ 
+        document.getElementsByClassName('earth')[i].classList.toggle("dark_earth");
+	}
+
+	for (let i = 0; i < document.getElementsByClassName('button_c').length; i++) {
+ 
+        document.getElementsByClassName('button_c')[i].classList.toggle("button_dark");
+	}
+	
+	for (let i = 0; i < document.getElementsByClassName('button_earth').length; i++) {
+ 
+        document.getElementsByClassName('button_earth')[i].classList.toggle("button_earth_dark");
+	} 
+	
+	for (let i = 0; i < document.getElementsByClassName('display_venus').length; i++) {
+ 
+        document.getElementsByClassName('display_venus')[i].classList.toggle("display_venus_dark");
+	}
+	
+	for (let i = 0; i < document.getElementsByClassName('display_earth').length; i++) {
+ 
+        document.getElementsByClassName('display_earth')[i].classList.toggle("display_earth_dark");
+	}	
+		                        
+      }
+      
+    </script>
 
 <!--<form name="calendar" action="./cgi-bin/mcdcgi.py" method="post" target="_blank"> -->
-<form name="calendar" action="./cgi-bin/mcdcgi.py" method="get" target="_blank">
+<form name="calendar" action="./cgi-bin/vcdcgi.py" method="get" target="_blank">
 <!-- aussi possible: get a la place de post. pour avoir un beau lien -->
 
 <center>
-<b style="font-size: 125%;">Mars Climate Database v5.3: The Web Interface</b><br>
-<a href="http://www-mars.lmd.jussieu.fr/mars/info_web/index.html">[Information]</a>
-<a href="./diapo.html">[Gallery]</a>
-<a href="https://github.com/aymeric-spiga/mcd_python/issues/new">[Report issue]</a><br>
-<a href="#" onclick="window.location.reload(true);"><img src="PIA03610_red.jpg" height=100 width=1400></a><br>
+<b style="font-size: 125%;"><font face="Calibri" size="20px" class='titre1'>Venus Climate Database v1.1 : The Web Interface</font></b><br>
+<a href="http://www-venus.lmd.jussieu.fr/info_web/index.html"><font face="Calibri" size="3px" class='titre2'>[Information]</font></a>
+<a href="./diapo_venus.html"><font face="Calibri" size="3px"  class='titre2'>[Gallery]</font></a>
+<a href="https://github.com/aymeric-spiga/mcd_python/issues/new"><font face="Calibri" size="3px" class='titre2'>[Report issue]</font></a><br>
+<a href="#" onclick="window.location.reload(true);"></a><br>
 </center>
 
-<table align="center" border="1" width="1400" bgcolor="#F5DEB3">
+
+
+
+<!--<button onclick="darkMode()">Darkmode</button>
+<button onclick="lightMode()">LightMode</button>
+    <script>
+      function darkMode() {
+        var element = document.body;
+        var content = document.getElementById("DarkModetext");
+        element.className = "dark-mode";
+        content.innerText = "Dark Mode is ON";
+      }
+      function lightMode() {
+        var element = document.body;
+        var content = document.getElementById("DarkModetext");
+        element.className = "light-mode";
+        content.innerText = "Dark Mode is OFF";
+      }
+    </script>-->
+    
+<table align="center" border="1" width="1400" style="width:100%" class='titre1'>
 <!--<table align="center" border="1" width="1200" bgcolor="#F6CECE">-->
 
 <tr>
 <td align="center">
-<i>One-click presets</i>
+<i><font face="Calibri" size="5px" color="white" class='main_font'>Main settings</font></i>
 </td>
 <td align="center">
-<i>Main settings </i>
-<input type="button" value="(reset)" style="font-size: 75%;" onClick="window.location.reload(true);"/><br />
+<i><font face="Calibri" size="5px" color="white" class='main_font'>Advanced settings   </font></i>
+<input class='button_c' type="button" value="RESET" style="font-size: 90%; " onClick="window.location.reload(true);"/><br />
 </td>
 <td align="center">
-<i>Advanced settings and information</i>
+<i><font face="Calibri" size="5px" color="white" class='main_font'>One-click presets</font></i>
 </td>
 </tr>
+
+
+
 <tr><td align="center"></td><td align="center"></td><td align="center"></td></tr>
-<tr>
-<td align="center">
-<b>LANDING SITE & DATE</b><br />
-<input type="button" value="Land now at equator!" onClick="DefaultDateValues();DefaultTimeValues();Convert2Ls();PlaceValues(0.0,0.0)" /><br />
-<input type="button" value="InSight" onClick="DateAndTimeValues(2018,11,26,19,44,52);Convert2Ls();MapValues(135.6,4.5);PlaceValues(135.6,4.5)" />
-<input type="button" value="Curiosity" onClick="DateAndTimeValues(2012,8,6,05,17,57);Convert2Ls();MapValues(137.4,-4.6);PlaceValues(137.4,-4.6)" />
-<input type="button" value="Phoenix" onClick="DateAndTimeValues(2008,5,25,23,38,23);Convert2Ls();MapValues(234.25,68.22);PlaceValues(234.25,68.22)" /><br />
-<input type="button" value="Opportunity" onClick="DateAndTimeValues(2004,1,25,4,55,0);Convert2Ls();MapValues(354.47,-1.95);PlaceValues(354.47,-1.95)" />
-<input type="button" value="Spirit" onClick="DateAndTimeValues(2004,1,4,4,26,0);Convert2Ls();MapValues(175.48,-14.57);PlaceValues(175.48,-14.57)" /><br />
-<input type="button" value="Pathfinder" onClick="DateAndTimeValues(1997,7,4,16,56,55);Convert2Ls();MapValues(-33.22,19.13);PlaceValues(-33.22,19.13)" /><br /> 
-<input type="button" value="Viking 1" onClick="DateAndTimeValues(1976,7,20,11,53,6);Convert2Ls();MapValues(-49.97,22.48);PlaceValues(-49.97,22.48)" />
-<input type="button" value="Viking 2" onClick="DateAndTimeValues(1976,9,3,22,58,20);Convert2Ls();MapValues(-225.74,47.97);PlaceValues(-225.74,47.97)" />
 </td>
-<td align="center">
+<td align="center" style = "vertical-align:top" >
+<br>
+<b><font face="Calibri" size="5px" color="a1b9d1" class='titre1'>CUSTOMIZE TIME COORDINATES</font></b><br /> 
+<br />
 <input type="radio" name="datekeyhtml" value="1" checked>
-<b><font color="red">MARS date</font></b> 
-<a href="http://www-mars.lmd.jussieu.fr/mars/time/solar_longitude.html">
-Solar longitude (Ls)</a>
-<input type="text" size="3" name="ls"> degrees<br />
-<a href="http://www-mars.lmd.jussieu.fr/mars/time/local_time.html">
-Local Time</a>
-<input type="text" size="3" name="localtime" value="0."> Martian hour<br />
-<span style="font-size: 80%;">Ls and LT: write a value (or) a range 'val1 val2' (or) 'all'</span><br />
+<b><font face="Calibri" size="5px" color="#c9d8e7" class='titre2'>VENUS date</font></b> <br />
+<a href="http://www-venus.lmd.jussieu.fr/time/localtime.html">
+<font face="Calibri" size="4px" color="c9d8e7" class='titre1'>    Local Time</font></a>
+<input class='button_c' type="text" size="3px" name="localtime" value="0."><font face="Calibri" size="3px" color="c9d8e7" class='titre1'> Venusian hour</font><br />
+<font face="Calibri" size="3px" color="#c9d8e7" class='titre1'> write a value (or) a range 'val1 val2' (or) 'all'</font><br />
 <br />
 <input type="radio" name="datekeyhtml" value="0">
-<b><font color="blue">EARTH date</font></b> 
-YY / MM / DD @ hh:mm:ss UTC<br />
-<input type="text" size="3" name="year"> / <input type="text" size="1" name="month"> / <input type="text" size="1" name="day"> @
-<input type="text" size="1" name="hours">:<input type="text" size="1" name="minutes">:<input type="text" size="1" name="seconds"><br />
-<input type="button" value="Use Earth date to calculate Mars Ls" onClick="Convert2Ls();"><br />
+<b><font face="Calibri" size="5px" color="#8ECFC9" class='earth'>EARTH date</font></b> 
+<font face="Calibri" size="4px" color="#8ECFC9" class='earth'>YY / MM / DD @ hh:mm:ss UTC</font></b><br />
+<input type="text" size="3px" name="year" class='button_earth'> <font face="Calibri" size="4px" color="#8ECFC9" class='earth'>/</font> <input type="text" size="1px" name="month" class='button_earth'> <font face="Calibri" size="4px" color="#8ECFC9" class='earth'>/</font> <input type="text" size="1px" name="day" class='button_earth'> <font face="Calibri" size="4px" color="#8ECFC9" class='earth'>@</font>
+<input type="text" size="1" name="hours" class='button_earth'><font face="Calibri" size="4px" color="#8ECFC9" class='earth'>:</font><input type="text" size="1" name="minutes" class='button_earth'><font face="Calibri" size="4px" color="#8ECFC9" class='earth'>:</font><input type="text" size="1" name="seconds" class='button_earth'><br />
+<input class='button_earth' type="button" value="Use Earth date to calculate Venus Ls" onClick="Convert2Ls();"><br /><br />
+<font face="Calibri" size="3px" color="#A1CBBD" class='earth'>Earth Julian Date</font> <input type="text" size="12px" name="julian" readonly="readonly" class='display_earth'><br />
+<font face="Calibri" size="3px" color="#D8A88B" class='titre2'>Venus Solar Longitude</font> <input type="text" size="4px" name="ls" readonly="readonly" class='display_venus'></span><br />
+
 </td>
-<td align="center">
-Earth <span style="font-size: 75%;">Julian Date</span> <input type="text" size="10" name="julian" readonly="readonly" style="background-color : #F5DEB3;"><br />
-Mars <span style="font-size: 75%;">MY</span> <input type="text" size="1" name="martianyear" readonly="readonly" style="background-color : #F5DEB3;"> 
- - <span style="font-size: 75%;">MM</span> <input type="text" size="1" name="martianmonth" readonly="readonly" style="background-color : #F5DEB3;"><span style="font-size: 50%;"> / 12</span>
- - <span style="font-size: 75%;">sol</span> <input type="text" size="2" name="sol" readonly="readonly" style="background-color : #F5DEB3;"><span style="font-size: 50%;"> / 669</span><br />
-</td>
-</tr>
-<tr>
-<td align="center">
-<hr>
-<b>TIME OF DAY</b>
-<input type="button" value="Morning" onClick="PlaceValues2(9.)" /><br />
-<input type="button" value="Afternoon" onClick="PlaceValues2(15.)" />
-<input type="button" value="Evening" onClick="PlaceValues2(21.)" />
-<input type="button" value="Night" onClick="PlaceValues2(3.)" /><br />
-<hr>
-<b>ALTITUDE</b>
-<input type="button" value="Near surface" onClick="PlaceValues3(2.)" /><br />
-<input type="button" value="Boundary layer" onClick="PlaceValues3(1000.)" />
-<input type="button" value="Troposphere" onClick="PlaceValues3(10000.)" /><br/>
-<input type="button" value="Mesophere" onClick="PlaceValues3(80000.)" />
-<input type="button" value="Thermosphere" onClick="PlaceValues3(180000.)" /><br />
-<hr>
-</td>
-<td align="center">
-<b>CUSTOMIZE COORDINATES ON MARS</b><br />
-<span style="font-size: 80%;">write a value (or) a range 'val1 val2' (or) 'all'</span><br />
-<ul>
-<li>Latitude <input type="text" size="7" name="latitude" value="0."> degree North
-<li>Longitude <input type="text" size="7" name="longitude" value="0."> degree East
-<li>Altitude <input type="text" size="9" name="altitude" value="10."> <select name="zkey">
-<option value="3" selected>m above surface</option>
-<option value="2"         >m above "sea level"</option>
-<option value="1"         >m from Mars center</option>
-<option value="4"         >Pa (pressure level)</option>
-<!--
-<option value="5"         >above 3396 km from Mars center</option>
--->
-</select>
-</ul>
-</td>
-<td align="left">
-&nbsp;&nbsp;CUSTOMIZE DATA REQUEST
+
+<td align="left" style = "vertical-align:top">
+<br>
+&nbsp;&nbsp;<b><font face="Calibri" size="5px" color="a1b9d1" class='titre1'>CUSTOMIZE DATA REQUEST</font></b><br />
 <ul>
 <!--
 <li> MCD version
@@ -120,40 +231,64 @@ Mars <span style="font-size: 75%;">MY</span> <input type="text" size="1" name="m
 </li>
 -->
 <li>
-Same <a href="http://www-mars.lmd.jussieu.fr/mars/time/local_time.html">local time</a> everywhere
-<input type="radio" name="isfixedlt" value="off" checked /> off
-<input type="radio" name="isfixedlt" value="on"          /> on
+<font face="Calibri" size="4px" color="white" class='main_font'>Same</font> <a href="http://www-venus.lmd.jussieu.fr/time/localtime.html"><font face="Calibri" size="4px" color="white" class='main_font'>localtime</font></a> <font face="Calibri" size="4px" color="white" class='main_font'>everywhere</font>
+<input type="radio" name="isfixedlt" value="off" checked /> <font face="Calibri" size="3px" color="white" class='main_font'>off</font>
+<input type="radio" name="isfixedlt" value="on"          /> <font face="Calibri" size="3px" color="white" class='main_font'>on</font>
 <li>
-<a href="http://www-mars.lmd.jussieu.fr/mars/info_web/index.html#scenarios">Dust/EUV scenario</a> 
-<select name="dust">
-<option value="1" selected>climatology ave solar</option>
-<option value="2"         >climatology min solar</option>
-<option value="3"         >climatology max solar</option>
-<option value="4"         >dust storm min solar</option>
-<option value="5"         >dust storm ave solar</option>
-<option value="6"         >dust storm max solar</option>
-<option value="7"         >warm (dusty, max solar)</option>
-<option value="8"         >cold (low dust, min solar)</option>
-<option value="24"        >Martian Year 24 </option>
-<option value="25"        >Martian Year 25 </option>
-<option value="26"        >Martian Year 26 </option>
-<option value="27"        >Martian Year 27 </option>
-<option value="28"        >Martian Year 28 </option>
-<option value="29"        >Martian Year 29 </option>
-<option value="30"        >Martian Year 30 </option>
-<option value="31"        >Martian Year 31 </option>
-<option value="32"        >Martian Year 32 </option>
-<option value="33"        >Martian Year 33 </option>
-</select></li>
-<li>Use <a href="http://www-mars.lmd.jussieu.fr/mars/info_web/index.html#highres">high-resolution topography</a> 
-<input type="radio" name="hrkey" value="0"          /> off
-<input type="radio" name="hrkey" value="1"  checked /> on
+<a href="http://www-venus.lmd.jussieu.fr/info_web/index.html#scenarios"><font face="Calibri" size="4px" color="white" class='main_font'>Cloud albedo/EUV scenario</font></a> 
+<select onchange='displayEUV()' id = 'select_scenario' name="scena">
+<option value="1" selected>Standard cloud albedo ave solar </option>
+<option value="2"         >Standard cloud albedo min solar</option>
+<option value="3"         >Standard cloud albedo max solar</option>
+<option value="4"         >Low cloud albedo ave solar</option>
+<option value="5"         >High cloud albedo ave solar</option>
+<option value="6"         >EUV deduced from Earth date</option>
+<option value="7"         >EUV specified </option> <br />
+
+
+
+</select>
+
+<div>&nbsp<font face="Calibri" size="3px" color="c9d8e7" class='titre2' id='E107_font'>EUV E10.7 factor</font> <input type="text" size="5px" name="varE107" value="200." class='button_c' id='E107_but'></input>         <font face="Calibri" size="3px" color="c9d8e7" class='titre2' id='E107_font2'>s.f.u</font></li></div>
+ 
+
+
+<script>
+
+function displayEUV() {
+
+if(document.calendar.scena.value === '7') {
+  
+  document.getElementById("E107_but").style.display = "";
+  document.getElementById("E107_font").style.display = "";
+  document.getElementById("E107_font2").style.display = "";
+ 
+  
+}
+
+else {
+  document.getElementById("E107_but").style.display = "none";
+  document.getElementById("E107_font").style.display = "none";
+  document.getElementById("E107_font2").style.display = "none";
+  
+  }
+  
+  }
+              
+
+</script>
+
+
+
+<li><a href="http://www-venus.lmd.jussieu.fr/info_web/index.html#highres"><font face="Calibri" size="4px" color="white" class='main_font'>High-resolution topography</font></a> 
+<input type="radio" name="hrkey" value="0"          /> <font face="Calibri" size="3px" color="white" class='main_font'>off</font>
+<input type="radio" name="hrkey" value="1"  checked /> <font face="Calibri" size="3px" color="white" class='main_font'>on</font>
 <!--<input type="checkbox" name="hrkey" value="1" checked /> -->
 </li>
-<li> Averaging (for 2D plots) 
-<input type="radio" name="averaging" value="off"  checked /> off
-<input type="radio" name="averaging" value="lon"          /> zonal
-<input type="radio" name="averaging" value="loct"         /> diurnal
+<li> <font face="Calibri" size="4px" color="white" class='main_font'>Averaging</font><font face="Calibri" size="3px" color="c9d8e7" class='titre1'> <i>(only for 2D plots for now!)</i></font> 
+<input type="radio" name="averaging" value="off"  checked /> <font face="Calibri" size="3px" color="white" class='main_font'>off</font>
+<input type="radio" name="averaging" value="lon"          /> <font face="Calibri" size="3px" color="white" class='main_font'>zonal</font>
+<input type="radio" name="averaging" value="loct"         /> <font face="Calibri" size="3px" color="white" class='main_font'>diurnal</font>
 </li>
 <!--
 <li> Zonal averaging (for 2D plots)
@@ -167,53 +302,51 @@ Same <a href="http://www-mars.lmd.jussieu.fr/mars/time/local_time.html">local ti
 -->
 </ul>
 </td>
+<td align="center" style = "vertical-align:top">
+<br>
+<b><font align="center" face="Calibri" size="5px" color="a1b9d1" class='titre1'>LANDING SITE & DATE</font></b><br />
+<br>
+<input class='button_c' style="height:30px; width:150px" type="button" value="Now at equator!" onClick="DefaultDateValues();DefaultTimeValues();Convert2Ls();PlaceValues(0.0,0.0)" /> 
+<input class='button_c' style="height:30px; width:150px" type="button" value="PV Sounder" onClick="DateAndTimeValues(1978,12,19,19,39,53);Convert2Ls();MapValues(304.0,4.4);PlaceValues(304.0,4.4)" />
+<input class='button_c' style="height:30px; width:150px" type="button" value="PV North" onClick="DateAndTimeValues(1978,12,19,19,42,40);Convert2Ls();MapValues(4.8,59.3);PlaceValues(4.8,59.3)" /><br /> 
+<input class='button_c' style="height:30px; width:150px" type="button" value="PV Day" onClick="DateAndTimeValues(1978,12,19,19,47,59);Convert2Ls();MapValues(317.0,-31.3);PlaceValues(317.0,-31.3)" /> 
+<input class='button_c' style="height:30px; width:150px" type="button" value="PV Night" onClick="DateAndTimeValues(1978,12,19,19,52,5);Convert2Ls();MapValues(56.7,-28.7);PlaceValues(56.7,-28.7)" />
+<input class='button_c' style="height:30px; width:150px" type="button" value="Vega2" onClick="DateAndTimeValues(1985,6,15,3,0,50);Convert2Ls();MapValues(181.08,-6.45);PlaceValues(181.08,-6.45)" /> 
+</td>
 </tr>
 <tr>
-<td align="center">
-<b>INTEREST</b>
-<input type="button" value="Atmosphere" onClick="PlaceVar('t','p','none','none');ChooseColor('jet')" /><br />
-<input type="button" value="Winds" onClick="PlaceVar('wind','w','u','v');ChooseColor('RdBu_r')" />
-<input type="button" value="Weather" onClick="PlaceVar('ps_ddv','rho_ddv','none','none');ChooseColor('RdBu_r')" /><br />
-<input type="button" value="Water cycle" onClick="PlaceVar('h2ovap','mtot','h2oice','icetot');ChooseColor('Blues')" />
-<input type="button" value="Chemistry" onClick="PlaceVar('o3','h2ovap','none','none');ChooseColor('jet')" /><br />
-<input type="button" value="Landing engineering" onClick="PlaceVar('rho','visc','none','none');ChooseColor('YlOrRd')" /><br />
-<input type="button" value="Glaciology" onClick="PlaceVar('tsurfmn','tsurfmx','co2ice','icetot');ChooseColor('spectral')" />
-<input type="button" value="Surface meteorology" onClick="PlaceVar('ps','tsurf','none','none');ChooseColor('jet')" /><br />
-<input type="button" value="Radiative balance" onClick="PlaceVar('lwdown','swdown','lwup','swup');ChooseColor('hot')" /><br />
-</td>
-<td align="center">
-<b>CUSTOMIZE VARIABLE(S) TO BE DISPLAYED</b><br />
-<br />
-Variable 1 <select name="var1">
-<option value="t"     selected>Temperature (K)</option>
-<script src="listvar.js"></script></select><br />
-Variable 2 <select name="var2">
-<option value="none"  selected>(None)</option>
-<option value="t"     >Temperature (K)</option>
-<script src="listvar.js"></script></select><br />
-Variable 3 <select name="var3">
-<option value="none"  selected>(None)</option>
-<option value="t"     >Temperature (K)</option>
-<script src="listvar.js"></script></select><br />
-Variable 4 <select name="var4">
-<option value="none"  selected>(None)</option>
-<option value="t"     >Temperature (K)</option>
-<script src="listvar.js"></script></select><br />
-</td>
-<td align="left">
+<td align="center"  style = "vertical-align:top" >
 <br>
-&nbsp;&nbsp;CUSTOMIZE FIGURES
+<b><font face="Calibri" size="5px" color="a1b9d1" class='titre1'>CUSTOMIZE SPATIAL COORDINATES</font></b><br />
+<font face="Calibri" size="3px" color="#c9d8e7" class='titre2'>write a value (or) a range 'val1 val2' (or) 'all'</font><br />
 <ul>
-<li> Figure format
-<input type="radio" name="dpi" value="80" checked> PNG
-<input type="radio" name="dpi" value="160"> PNG hi-res
-<input type="radio" name="dpi" value="eps"> EPS
+<font face="Calibri" size="4px" color="c9d8e7" class='titre2'>Latitude</font> <input type="text" size="7" name="latitude" value="0." class='button_c'> <font face="Calibri" size="3px" color="c9d8e7" class='titre2'>degree North</font><br />
+<font face="Calibri" size="4px" color="c9d8e7" class='titre2'>Longitude</font> <input class='button_c' type="text" size="7" name="longitude" value="0."> <font face="Calibri" size="3px" color="c9d8e7" class='titre2'>degree East</font><br />
+<font face="Calibri" size="4px" color="c9d8e7" class='titre2'>Altitude</font> <input class='button_c' type="text" size="9" name="altitude" value="10."> <select name="zkey">
+<option value="3" selected>m above surface</option>
+<option value="2"         >m above "reference sphere"</option>
+<option value="1"         >m from Venus center</option>
+<option value="0"         >Pa (pressure level)</option>
+<!--
+<option value="5"         >above 3396 km from Mars center</option>
+-->
+</select>
+</ul>
+</td>
+<td align="left" style = "vertical-align:top" >
+<br>
+&nbsp;&nbsp;<b><font face="Calibri" size="5px" color="a1b9d1" class='titre1'>CUSTOMIZE FIGURES</font></b><br />
+<ul>
+<li> <font face="Calibri" size="4px" color="white" class='main_font'>Figure format</font>
+<input class='main_font'type="radio" name="dpi" value="80" checked> <font face="Calibri" size="3px" color="white" class='main_font'>PNG</font>
+<input type="radio" name="dpi" value="160"> <font face="Calibri" size="3px" color="white" class='main_font'>PNG hi-res</font>
+<input type="radio" name="dpi" value="eps"> <font face="Calibri" size="3px" color="white" class='main_font'>EPS</font>
 </li>
-<li>[1D] Log(values)
-<input type="radio" name="islog" value="off" checked /> off
-<input type="radio" name="islog" value="on" /> on
+<li> <font face="Calibri" size="4px" color="white" class='main_font'>[1D] Log(values)</font>
+<input type="radio" name="islog" value="off" checked /> <font face="Calibri" size="3px" color="white" class='main_font'>off</font>
+<input type="radio" name="islog" value="on" /> <font face="Calibri" size="3px" color="white" class='main_font'>on</font>
 </li>
-<li> [2D] Colormap
+<li> <font face="Calibri" size="4px" color="white" class='main_font'>[2D] Colormap</font>
 <select name="colorm">
 <option value="jet"       selected>blue green yellow red</option>
 <option value="Greys"             >grey</option>
@@ -225,9 +358,9 @@ Variable 4 <select name="var4">
 <option value="RdBu"              >red white blue</option>
 </select>
 </li>
-<li> [2D] Values range <input type="text" size="2" name="minval"> to <input type="text" size="2" name="maxval">
+<li> <font face="Calibri" size="4px" color="white" class='main_font'>[2D] Values range</font> <input class='button_c' type="text" size="2" name="minval"> <font face="Calibri" size="3px" color="white" class='main_font'>to</font>  <input class='button_c' type="text" size="2" name="maxval">
 </li>
-<li> [2D map] 
+<li> <font face="Calibri" size="4px" color="white" class='main_font'>[2D map] </font>
 <select name="proj">
 <!--<option value=""          selected>flat (cylindrical lat-lon)</option>-->
 <option value="cyl" selected>flat</option>
@@ -237,41 +370,54 @@ Variable 4 <select name="var4">
 <!--<option value="robin">map</option>-->
 <!--<option value="laea">laea</option>-->
 </select>
-proj @ lat <input type="text" size="1" name="plat"> lon <input type="text" size="1" name="plon">
+<font face="Calibri" size="3px" color="white" class='main_font'>proj @ lat </font> <input class='button_c' type="text" size="1" name="plat"> <font face="Calibri" size="3px" color="white" class='main_font'> lon </font> <input class='button_c' type="text" size="1" name="plon">
 </li>
-<li> [2D map] Transparency (%) <input type="text" size="1" name="trans"></li>
-<li> [2D map] Wind vectors
-<input type="radio" name="iswind" value="off" checked /> off
-<input type="radio" name="iswind" value="on"          /> on</li>
+<li> <font face="Calibri" size="4px" color="white" class='main_font'>[2D map] Transparency (%) </font>  <input class='button_c' type="text" size="1" name="trans"></li>
+<li> <font face="Calibri" size="4px" color="white" class='main_font'>[2D map] Wind vectors </font>
+<input type="radio" name="iswind" value="off" checked /> <font face="Calibri" size="3px" color="white" class='main_font'>off </font>
+<input type="radio" name="iswind" value="on"          /> <font face="Calibri" size="3px" color="white" class='main_font'>on </font>
 </li>
-<li> [2D map] <input type="checkbox" name="istherepoint" value="on" /> Add marker at lat <input type="text" size="1" name="latpoint"> lon <input type="text" size="1" name="lonpoint">
+<li> <font face="Calibri" size="4px" color="white" class='main_font'>[2D map]</font> <input class='button_c' type="checkbox" name="istherepoint" value="on" /> <font face="Calibri" size="3px" color="white" class='main_font'>Add marker at lat </font> <input class='button_c' type="text" size="1" name="latpoint"> <font face="Calibri" size="3px" color="white" class='main_font'>lon </font> <input class='button_c' type="text" size="1" name="lonpoint">
 </ul>
 </td>
+
+<td rowspan = '2' align="center">
+<img align="center" src="venus.png" height=450 width=425> <br />
+<font align = "right" face="Calibri" size="2px" class="titre2">&copy;JAXA/ISAS/DARTS/Damia Bouic</font>
+</td>
+
 </tr>
 <tr>
-<td align="center">
-<!--
-<input type="button" value="Values" style="font-weight:bold" onClick="CorrectValue();submit_form_beginner()"/>
-<input type="button" value="Daily cycle" style="font-weight:bold" onClick="CorrectValue();PlaceValues2('all');submit_form_beginner()"/><br />
-<input type="button" value="Vertical profile" style="font-weight:bold" onClick="CorrectValue();PlaceValues3('all');submit_form_beginner()"/>
-<input type="button" value="Global map" style="font-weight:bold" onClick="PlaceValues('all','all');submit_form_beginner()"/><br />
--->
-<b>PLOT REQUEST</b>
-<input type="button" value="Daily cycle" onClick="PlaceValues2('all');Checkaltitude();Checklatitude();Checklongitude()" /><br />
-<input type="button" value="Vertical profile" onClick="PlaceValues3('all');Checklatitude();Checklongitude();Checklocaltime()" />
-<input type="button" value="Altitude/time plot" onClick="PlaceValues2('all');PlaceValues3('all');Checklatitude();Checklongitude()" /><br />
-<input type="button" value="Global map" onClick="Checkaltitude();Checklocaltime();Setproj('cyl');PlaceValues('all','all')" />
-<input type="button" value="Sphere" onClick="Checkaltitude();Checklocaltime();Setproj('ortho');PlaceValues('all','all')" /><br />
+<td align="center" style = "vertical-align:top" >
+<br>
+<b><font face="Calibri" size="5px" color="a1b9d1" class='titre1'>CUSTOMIZE VARIABLE(S) TO BE DISPLAYED</font></b><br />
+<br />
+<font face="Calibri" size="4px" color="c9d8e7" class='titre2'>Variable 1 </font> <select name="var1">
+<option value="t"     selected>Temperature (K)</option>
+<script src="listvar_vcd.js"></script></select><br />
+<font face="Calibri" size="4px" color="c9d8e7" class='titre2'>Variable 2 </font> <select name="var2">
+<option value="none"  selected>(None)</option>
+<option value="t"     >Temperature (K)</option>
+<script src="listvar_vcd.js"></script></select><br />
+<font face="Calibri" size="4px" color="c9d8e7" class='titre2'>Variable 3 </font> <select name="var3">
+<option value="none"  selected>(None)</option>
+<option value="t"     >Temperature (K)</option>
+<script src="listvar_vcd.js"></script></select><br />
+<font face="Calibri" size="4px" color="c9d8e7" class='titre2'>Variable 4 </font> <select name="var4">
+<option value="none"  selected>(None)</option>
+<option value="t"     >Temperature (K)</option>
+<script src="listvar_vcd.js"></script></select><br />
 </td>
 <td align="center">
-<input type="button" value="SUBMIT" style="font-weight:bold;font-size:125%;color:#006600" onClick="submit_form()"/>
+<input class='button_c' type="button" value="SUBMIT" style="font-weight:bold;font-size:125%;" onClick="submit_form()"/> <br />  
+<br><font face="Calibri" size="4px" color="white" class='main_font'>Venus Climate Database (c) LMD/ESA.</font><br />
+<a href="https://github.com/aymeric-spiga/mcd_python"><font face="Calibri" size="4px" color="white" class='main_font'>Open source python interface</font></a> <font face="Calibri" size="4px" color="white" class='main_font'>by</font> <a href="http://www.lmd.jussieu.fr/~aslmd/"> <font face="Calibri" size="4px" color="white" class='main_font'>A. Spiga</font></a> <font face="Calibri" size="4px" color="white" class='main_font'>(LMD).</font><br />
+<font face="Calibri" size="4px" color="white" class='main_font'>Javascript time conversion by</font> <a href="http://www.lmd.jussieu.fr/~emillour"><font face="Calibri" size="4px" color="white" class='main_font'>E. Millour</font></a> <!--(<a href="http://www-mars.lmd.jussieu.fr/mars/time/martian_time.html"><font face="Calibri" size="4px" color="white" class='main_font'>link</font></a>).-->
 </td>
-<td align="center">
-Mars Climate Database (c) LMD/OU/IAA/ESA/CNES.<br />
-<a href="https://github.com/aymeric-spiga/mcd_python">Open source python interface</a> by <a href="http://www.lmd.jussieu.fr/~aslmd/">A. Spiga</a> (LMD).<br />
-Javascript time conversion by <a href="http://www.lmd.jussieu.fr/~emlmd">E. Millour</a> (<a href="http://www-mars.lmd.jussieu.fr/mars/time/martian_time.html">link</a>).
 </td>
+
 </tr>
+
 </table>
 </body>
 </html>
