@@ -1,0 +1,81 @@
+       .titre1{
+        background-color: #E0D4C9;
+        color: #5F3116;
+      }
+      
+       .titre2{
+        background-color: #E0D4C9;
+        color: #8E471D;
+      }     
+      
+       .main_font{
+        background-color: #E0D4C9;
+        color: black;
+      }  
+      
+      .earth {
+        background-color: #E0D4C9;
+        color: #309692;
+      } 
+      
+      .button_c {
+        background-color: #433228;
+        color: white;
+      }       
+      
+      .button_earth {
+        background-color: #309692;
+        color: white;
+      } 
+      
+      .display_earth {
+        background-color: #E0D4C9;
+        color:#309692;
+      }      
+      
+      .display_mars {
+        background-color:#E0D4C9 ;
+        color: #8E471D;
+      }       
+            
+      .dark1 {
+        background-color: black;
+        color: #DCAB81;
+      }
+      
+      .dark2 {
+        background-color: black;
+        color: #F1CEB0;
+      }  
+       .main_dark{
+      
+        background-color: black;
+        color: white;
+      }     
+      
+      .dark_earth {
+        background-color: black;
+        color: #8ECFC9;
+      }        
+
+      .button_dark {
+        background-color: #D8A576;
+        color: black;
+      }
+      
+      .button_earth_dark {
+        background-color: #8ECFC9;
+        color: black;
+      }
+
+      .display_earth_dark {
+        background-color: black;
+        color:#8ECFC9;
+      }      
+      
+      .display_mars_dark {
+        background-color: black;
+        color: #DCAB81;
+      }	
+	
+      }

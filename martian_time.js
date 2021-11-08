@@ -533,5 +533,50 @@ document.calendar.submit();
 }
 
 
+      function darkMode() {
+            
+	for (let i = 0; i < document.getElementsByClassName('titre1').length; i++) {
+ 
+        document.getElementsByClassName('titre1')[i].classList.toggle("dark1");
+	}
+	
+	for (let i = 0; i < document.getElementsByClassName('titre2').length; i++) {
+ 
+        document.getElementsByClassName('titre2')[i].classList.toggle("dark2");
+	} 
+	
+	for (let i = 0; i < document.getElementsByClassName('main_font').length; i++) {
+ 
+        document.getElementsByClassName('main_font')[i].classList.toggle("main_dark");
+	}
+
+	for (let i = 0; i < document.getElementsByClassName('earth').length; i++) {
+ 
+        document.getElementsByClassName('earth')[i].classList.toggle("dark_earth");
+	}
+
+	for (let i = 0; i < document.getElementsByClassName('button_c').length; i++) {
+ 
+        document.getElementsByClassName('button_c')[i].classList.toggle("button_dark");
+	}
+	
+	for (let i = 0; i < document.getElementsByClassName('button_earth').length; i++) {
+ 
+        document.getElementsByClassName('button_earth')[i].classList.toggle("button_earth_dark");
+	} 
+	
+	for (let i = 0; i < document.getElementsByClassName('display_mars').length; i++) {
+ 
+        document.getElementsByClassName('display_mars')[i].classList.toggle("display_mars_dark");
+	}
+	
+	for (let i = 0; i < document.getElementsByClassName('display_earth').length; i++) {
+ 
+        document.getElementsByClassName('display_earth')[i].classList.toggle("display_earth_dark");
+	}	
+		                        
+      }
+
+
 
 
