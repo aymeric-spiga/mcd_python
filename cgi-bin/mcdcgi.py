@@ -6,13 +6,13 @@
 ### line2 is for local web server (dev)
 ### should be the version used to f2py the MCD Fortran routines
 
-##################################################
+###################################################
 ### A Python CGI for the Venus Climate Database ###
-### ------------------------------------------ ###
-### Thomas Pierron 13/10/2021                  ###
-### ------------------------------------------ ###
-### (see mcdtest.py for examples of use)       ###
-##################################################
+### ------------------------------------------- ###
+### Thomas Pierron 13/10/2021                   ###
+### ------------------------------------------- ###
+### (see mcdtest.py for examples of use)        ###
+###################################################
 
 import cgi, cgitb 
 import numpy as np
@@ -96,8 +96,8 @@ if dev == "on":
   from modules import mcd_dev
   query=mcd_dev.mcd()
 else:
-  from modules import vcd
-  query=vcd.vcd_class()
+  from modules import mcd
+  query=mcd.vcd_class()
 
 
 # Get the kind of vertical coordinates and choose default behavior for "all"
@@ -337,12 +337,6 @@ print header
 #print query.printset()
 #print "<br />"
 
-#Optimization concerns
-print "<br />"
-print "fixedlt=",query.fixedlt
-print " Computing time=",time.clock()-start_time,"seconds"
-print "<br />"
-
 ## Now the part which differs
 if errormess != "":
                        print "<h1>Ooops!</h1>"
@@ -357,6 +351,12 @@ else:
                         print "<hr>"
                         if yeaheps:  print "<hr><a href='../"+fignamered+"'>!!!! Click here to download the EPS figure file !!!!</a><br /><hr>"
                         else:        print "<img src='../"+fignamered+"'><br /><hr>"
+
+
+#Optimization concerns
+print "<br />"
+print " <i>Rendering time=",time.clock()-start_time,"seconds</i>"
+print "<br />"
 
 ## This is quite common
 bottom = "</body></html>"

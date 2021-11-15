@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8" />
 <title>Venus Climate Database v1.1: The Web Interface</title>
-<script language="JavaScript" type="text/JavaScript" src="venusian_time.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="martian_time.js"></script>
 <!--<link rel="stylesheet" type="text/css" href="index_dark_testcss.css" />-->
     <style>
        
@@ -147,7 +147,7 @@
     </script>
 
 <!--<form name="calendar" action="./cgi-bin/mcdcgi.py" method="post" target="_blank"> -->
-<form name="calendar" action="./cgi-bin/vcdcgi.py" method="get" target="_blank">
+<form name="calendar" action="./cgi-bin/mcdcgi.py" method="get" target="_blank">
 <!-- aussi possible: get a la place de post. pour avoir un beau lien -->
 
 <center>
@@ -394,19 +394,19 @@ else {
 <br />
 <font face="Calibri" size="4px" color="c9d8e7" class='titre2'>Variable 1 </font> <select name="var1">
 <option value="t"     selected>Temperature (K)</option>
-<script src="listvar_vcd.js"></script></select><br />
+<script src="listvar.js"></script></select><br />
 <font face="Calibri" size="4px" color="c9d8e7" class='titre2'>Variable 2 </font> <select name="var2">
 <option value="none"  selected>(None)</option>
 <option value="t"     >Temperature (K)</option>
-<script src="listvar_vcd.js"></script></select><br />
+<script src="listvar.js"></script></select><br />
 <font face="Calibri" size="4px" color="c9d8e7" class='titre2'>Variable 3 </font> <select name="var3">
 <option value="none"  selected>(None)</option>
 <option value="t"     >Temperature (K)</option>
-<script src="listvar_vcd.js"></script></select><br />
+<script src="listvar.js"></script></select><br />
 <font face="Calibri" size="4px" color="c9d8e7" class='titre2'>Variable 4 </font> <select name="var4">
 <option value="none"  selected>(None)</option>
 <option value="t"     >Temperature (K)</option>
-<script src="listvar_vcd.js"></script></select><br />
+<script src="listvar.js"></script></select><br />
 </td>
 <td align="center">
 <input class='button_c' type="button" value="SUBMIT" style="font-weight:bold;font-size:125%;" onClick="submit_form()"/> <br />  
