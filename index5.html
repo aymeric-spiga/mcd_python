@@ -34,10 +34,10 @@
 <tr>
 <td align="center">
 <i><font face="Calibri" size="5px" color="black", class='main_font'>Main settings</font></i>
+<input class='button_c' type="button" value="RESET" style="font-size: 100%;  onClick="window.location.reload(true);"/><br />
 </td>
 <td align="center">
 <i><font face="Calibri" size="5px" color="black" class='main_font'>Advanced settings   </font></i>
-<input class='button_c' type="button" value="RESET" style="font-size: 90%;  onClick="window.location.reload(true);"/><br />
 </td>
 <td align="center">
 <i><font face="Calibri" size="5px" color="black" class='main_font'>One-click presets</font></i>
@@ -59,7 +59,7 @@
 <input class='button_c'type="text" size="4px" name="ls" > <font class='titre2' face="Calibri" size="3px" color="a25526">degrees</font><br />
 <a href="http://www-mars.lmd.jussieu.fr/mars/time/local_time.html">
 <font class='titre2' face="Calibri" size="4px" color="a25526">    Local Time</font></a>
-<input class='button_c' type="text" size="3px" name="localtime" value="0."><font class='titre2' face="Calibri" size="3px" color="a25526">Martian hour</font><br />
+<input class='button_c' type="text" size="3px" name="localtime" value="0."> <font class='titre2' face="Calibri" size="3px" color="a25526">Martian hour</font><br />
 <font class='titre1' face="Calibri" size="3px" color="#a25526">Ls and LT: write a value (or) a range 'val1 val2' (or) 'all'</font><br />
 <br />
 <input type="radio" name="datekeyhtml" value="0">
@@ -156,7 +156,7 @@
 <font class='titre2' face="Calibri" size="3px" color="#a25526">write a value (or) a range 'val1 val2' (or) 'all'</font><br />
 <ul>
 <font class='titre2' face="Calibri" size="4px" color="a25526">Latitude</font> <input class='button_c' type="text" size="7" name="latitude" value="0."> <font class='titre2' face="Calibri" size="3px" color="a25526">degree North</font><br />
-<font class='titre2' face="Calibri" size="4px" color="a25526">Longitude</font><input class='button_c' type="text" size="7" name="longitude" value="0."><font class='titre2' face="Calibri" size="3px" color="a25526">degree East</font><br />
+<font class='titre2' face="Calibri" size="4px" color="a25526">Longitude</font> <input class='button_c' type="text" size="7" name="longitude" value="0."> <font class='titre2' face="Calibri" size="3px" color="a25526">degree East</font><br />
 <font class='titre2' face="Calibri" size="4px" color="a25526">Altitude</font> <input class='button_c' type="text" size="9" name="altitude" value="10."> <select name="zkey">
 <option value="3" selected>m above surface</option>
 <option value="2"         >m above "sea level"</option>
@@ -242,13 +242,13 @@
 <font class='titre2' face="Calibri" size="4px" color="a25526">Variable 4 </font> <select name="var4">
 <option value="none"  selected>(None)</option>
 <option value="t"     >Temperature (K)</option>
-<script src="listvar.js"></script></select><br />
+<script src="listvar.js"></script></select><br /><br />
 </td>
 <td align="center">
-<input class='button_c' type="button" value="SUBMIT" style="font-weight:bold;font-size:125%;" onClick="submit_form()"/> <br />  
-<br><font class='main_font' face="Calibri" size="4px" color="black">Mars Climate Database (c) LMD/OU/IAA/ESA/CNES.</font><br />
-<a href="https://github.com/aymeric-spiga/mcd_python"><font class='main_font' face="Calibri" size="4px" color="black">Open source python interface</font></a> <font class='main_font' face="Calibri" size="4px" color="black">by</font> <a href="http://www.lmd.jussieu.fr/~aslmd/"> <font class='main_font' face="Calibri" size="4px" color="black">A. Spiga</font></a> <font class='main_font' face="Calibri" size="4px" color="black">(LMD).</font><br />
-<font class='main_font' face="Calibri" size="4px" color="black">Javascript time conversion by</font> <a href="http://www.lmd.jussieu.fr/~emlmd"><font class='main_font' face="Calibri" size="4px" color="black">E. Millour</font></a> (<a href="http://www-mars.lmd.jussieu.fr/mars/time/martian_time.html"><font class='main_font' face="Calibri" size="4px" color="black">link</font></a>).
+<input class='button_c' type="button" value="SUBMIT" style="font-weight:bold;font-size:180%;" onClick="submit_form()"/> <br />  
+<br><font class='main_font' face="Calibri" size="3px" color="black">Mars Climate Database (c) LMD/LATMOS/OU/IAA/ESA/CNES.</font><br />
+<a href="https://github.com/aymeric-spiga/mcd_python"><font class='main_font' face="Calibri" size="3px" color="black">Open source python interface</font></a> <font class='main_font' face="Calibri" size="3px" color="black">by</font> <a href="http://www.lmd.jussieu.fr/~aslmd/"> <font class='main_font' face="Calibri" size="3px" color="black">A. Spiga</font></a> <font class='main_font' face="Calibri" size="3px" color="black">(LMD).</font><br />
+<font class='main_font' face="Calibri" size="3px" color="black">Javascript time conversion by</font> <a href="http://www.lmd.jussieu.fr/~emlmd"><font class='main_font' face="Calibri" size="3px" color="black">E. Millour</font></a> (<a href="http://www-mars.lmd.jussieu.fr/mars/time/martian_time.html"><font class='main_font' face="Calibri" size="3px" color="black">link</font></a>).
 </td>
 </td>
 

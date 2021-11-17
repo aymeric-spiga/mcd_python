@@ -15,27 +15,32 @@
       
       .earth {
         background-color: #E0D4C9;
-        color: #309692;
+        color: #5c8989;
       } 
       
       .button_c {
         background-color: #433228;
         color: white;
+        border-color : #E0D4C9
       }       
       
       .button_earth {
-        background-color: #309692;
+        background-color: #5c8989;
         color: white;
+        border-color : #E0D4C9
       } 
       
       .display_earth {
         background-color: #E0D4C9;
-        color:#309692;
+        color:#5c8989;
+        border-color : black
+       
       }      
       
       .display_mars {
         background-color:#E0D4C9 ;
         color: #8E471D;
+        border-color : black
       }       
             
       .dark1 {
@@ -55,27 +60,34 @@
       
       .dark_earth {
         background-color: black;
-        color: #8ECFC9;
+        color: #b1c6c6;
       }        
 
       .button_dark {
-        background-color: #D8A576;
+        background-color: #C99C73;
         color: black;
+        border-color : black
       }
       
       .button_earth_dark {
-        background-color: #8ECFC9;
+        background-color: #b1c6c6;
         color: black;
+        border-color : black
+
       }
 
       .display_earth_dark {
         background-color: black;
-        color:#8ECFC9;
+        color:#b1c6c6;
+        border-color : white
+
       }      
       
       .display_mars_dark {
         background-color: black;
         color: #DCAB81;
+        border-color : white
+
       }	
 	
-      }
+      
