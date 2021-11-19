@@ -14,6 +14,11 @@ use
 ```git clone --recursive```
 to get submodule mcd-python
 
+For the VCD, you have to do a ```git checkout vcd``` to switch to the right branch after cloning.
+To update correctly the submodules (especially mcd-python) when you switch branches :
+  - if your Git version is >=2.13 : do ```git checkout --recurse-submodules vcd``` instead
+  - for older Git versions : do ```git checkout vcd``` then ```git submodule update --init --recursive```
+
 --- instructions
 
 * get VCD sources and data somewhere
