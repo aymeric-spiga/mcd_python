@@ -213,6 +213,8 @@ try: query.plat = float(form.getvalue("plat"))
 except: query.plat = 0.0
 try: query.plon = float(form.getvalue("plon"))
 except: query.plon = 0.0
+try: query.palt = float(form.getvalue("palt"))
+except: query.palt = None
 
 try:
   if (form.getvalue("istherepoint") == "on"):
@@ -271,7 +273,7 @@ else:              query.islog=False
 if errormess == "":
 
  # reference name (to test which figures are already in the database)
- try: reference = query.getnameset()+str(var1)+str(var2)+str(var3)+str(var4)+str(iswind)+str(isfixedlt)+averaging+query.colorm+str(query.min2d)+str(query.max2d)+str(query.dpi)+str(islog)+str(proj)+str(query.trans)+str(query.plat)+str(query.plon)+strpoint
+ try: reference = query.getnameset()+str(var1)+str(var2)+str(var3)+str(var4)+str(iswind)+str(isfixedlt)+averaging+query.colorm+str(query.min2d)+str(query.max2d)+str(query.dpi)+str(islog)+str(proj)+str(query.trans)+str(query.plat)+str(query.plon)+str(query.palt)+strpoint
  except: reference = "test"
  if dev == "on": reference = 'dev_'+reference
  ## -- use a MD5 hash for a unique reference which avoids long names
