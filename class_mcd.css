@@ -1,93 +1,163 @@
-       .titre1{
-        background-color: #E0D4C9;
-        color: #5F3116;
-      }
-      
-       .titre2{
-        background-color: #E0D4C9;
-        color: #8E471D;
-      }     
-      
-       .main_font{
-        background-color: #E0D4C9;
-        color: black;
-      }  
-      
-      .earth {
-        background-color: #E0D4C9;
-        color: #5c8989;
-      } 
-      
-      .button_c {
-        background-color: #433228;
-        color: white;
-        border-color : #E0D4C9
-      }       
-      
-      .button_earth {
-        background-color: #5c8989;
-        color: white;
-        border-color : #E0D4C9
-      } 
-      
-      .display_earth {
-        background-color: #E0D4C9;
-        color:#5c8989;
-        border-color : black
-       
-      }      
-      
-      .display_mars {
-        background-color:#E0D4C9 ;
-        color: #8E471D;
-        border-color : black
-      }       
-            
-      .dark1 {
-        background-color: black;
-        color: #DCAB81;
-      }
-      
-      .dark2 {
-        background-color: black;
-        color: #F1CEB0;
-      }  
-       .main_dark{
-      
-        background-color: black;
-        color: white;
-      }     
-      
-      .dark_earth {
-        background-color: black;
-        color: #b1c6c6;
-      }        
+      .titre_principal{
+         background-color: #E0D4C9;
+         color: #5F3116;
+         }   
+      .titre_principal_dark{
+         background-color: black;
+         color: #DCAB81;
+         }       
 
-      .button_dark {
+
+      .little_thing{
+         background-color: #E0D4C9;
+         color: #5F3116; 
+         }   
+      .little_thing_dark{
+         background-color: black;
+         color: #DCAB81; 
+         }
+
+
+      .table{
+         background-color: #E0D4C9;
+         color: #5F3116; 
+         }   
+      .table_dark{
+         background-color: black;
+         color: #DCAB81; 
+         }
+      
+      
+      .titre_table{
+         background-color: #E0D4C9;
+         color: #5F3116;          
+         }   
+      .titre_table_dark{
+         background-color: black;
+         color: #DCAB81; 
+         
+         }
+              
+              
+      
+      .font_mars{
+         background-color: #E0D4C9;
+         color: #8E471D; 
+         }   
+      .font_mars_dark{
+         background-color: black;
+         color: #F1CEB0; 
+         }
+         
+     
+      .drop_down_menu{
+         background-color: white;
+         color: black;
+         border-color : #E0D4C9
+         }   
+      .drop_down_menu_dark{
         background-color: #C99C73;
         color: black;
         border-color : black
-      }
-      
-      .button_earth_dark {
-        background-color: #b1c6c6;
+         } 
+         
+         
+      .fill_form{
+        background-color:white ;
+        color: black;
+        border-color : white
+         }   
+      .fill_form_dark{
+        background-color: white ;
         color: black;
         border-color : black
-
-      }
-
-      .display_earth_dark {
+         }          
+         
+         
+      .font_earth{
+         background-color: #E0D4C9;
+         color: #5c8989;
+         }   
+      .font_earth_dark{
+         background-color: black;
+         color: #b1c6c6;
+         } 
+         
+         
+      .fill_earth{
+        background-color: #5c8989;
+        color: white;
+        border-color : #E0D4C9
+         }   
+      .fill_earth_dark{
+        background-color: #b1c6c6;
+        color: black;
+        border-color : white
+         }          
+                 
+           
+      .display_earth{
+        background-color: #E0D4C9;
+        color:#5c8989;
+        border-color : black
+         }   
+      .display_earth_dark{
         background-color: black;
         color:#b1c6c6;
         border-color : white
-
-      }      
-      
-      .display_mars_dark {
+         } 
+         
+         
+      .display_mars{
+        background-color:#E0D4C9 ;
+        color: #8E471D;
+        border-color : black
+         }   
+      .display_mars_dark{
         background-color: black;
         color: #DCAB81;
         border-color : white
-
-      }	
-	
+         }          
+                   
+   
+       .main_font{
+        background-color: #E0D4C9;
+        color: black;
+      }
+        
+       .main_dark{ 
+        background-color: black;
+        color: white;
+      }
+         
+         
+      .little_button {
+        background-color: #433228;
+        color: white;
+        border-color : #E0D4C9
+      }          
+                  
+      .little_button_dark {
+        background-color: #C99C73;
+        color: black;
+        border-color : white
+      }          
+         
+         
+         
+      .big_button {
+        background-color: #433228;
+        color: white;
+        border-color : #E0D4C9
+      }          
+                  
+      .big_button_dark {
+        background-color: #C99C73;
+        color: black;
+        border-color : white
+      } 
       
+       .img {
+         margin-top: -30px;
+      }     
+           
