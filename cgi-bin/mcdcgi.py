@@ -24,7 +24,8 @@ import cStringIO
 import os as daos
 #import matplotlib.pyplot as mpl
 import matplotlib
-matplotlib.use('TkAgg')
+#matplotlib.use('TkAgg')
+matplotlib.use('Agg')
 
 
 import hashlib
@@ -68,6 +69,10 @@ def gethtmlcoord(userinput,defmin,defmax):
          else:                     isfree = -1
    # return values
    return isfree, val, vals, vale
+
+## This is quite common
+print "Content-type:text/html\n"
+print "  "  #Apache needs a space after content-type
 
 # set an errormess variable which must stay to None for interface to proceed
 errormess = ""
@@ -322,9 +327,6 @@ if errormess == "":
 
 #### NOW WRITE THE HTML PAGE TO USER
 
-## This is quite common
-print "Content-type:text/html\n"
-print "  "  #Apache needs a space after content-type
 
 #entete="""<?xml version="1.0" encoding="UTF-8"?> 
 #<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" "http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd">
