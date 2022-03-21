@@ -611,12 +611,26 @@ document.calendar.submit();
         if (document.getElementById("imgClickAndChange").src.includes("Mars_day.jpg")) 
         {
             document.getElementById("imgClickAndChange").src = "Mars_night.jpg";
-            console.log('uuu');
         }
         else 
         {
             document.getElementById("imgClickAndChange").src = "Mars_day.jpg";
         }
                                
+        
+        if (document.getElementById("darkmode_button").value === 'Darkmode')
+        {
+            document.getElementById("darkmode_button").value = "Brightmode";
+            }
+        else
+         {       
+                 document.getElementById("darkmode_button").value = "Darkmode";       
+         }
+        
 		                        
       }
+      
+      
+      
+      
+      
