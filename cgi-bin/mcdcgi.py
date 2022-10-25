@@ -93,7 +93,7 @@ if dev == "on":
   query=mcd_dev.mcd()
 else:
   from modules import mcd
-  query=mcd.mcd()
+  query=mcd.mcd_class()
 
 ## set MCD version changes if needed
 #try:     betatest = form.getvalue("betatest")

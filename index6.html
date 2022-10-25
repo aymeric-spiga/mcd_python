@@ -1,0 +1,385 @@
+<!-- Author Aymeric Spiga LMD -->
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8" />
+<title>Mars Climate Database v6.1: The Web Interface</title>
+<script language="JavaScript" type="text/JavaScript" src="martian_time.js"></script>
+<link rel="stylesheet" href="class_mcd.css">
+</head>
+
+<body onload="displayproj();DefaultDateValues();DefaultTimeValues();Convert2Ls();PlaceValues('all','all');DefaultSpaceTime()", class='titre_principal' ">
+
+<!--<div><button value='Nightmode' onclick="darkMode()" class='little_button'>Darkmode</button></div>-->
+<div><input id='darkmode_button' type='button' value='Darkmode' onclick="darkMode()" class='little_button'></input></div>
+
+
+<!--<form name="calendar" action="./cgi-bin/mcdcgi.py" method="post" target="_blank"> -->
+<form name="calendar" action="./cgi-bin/mcdcgi.py" method="get" target="_blank">
+<!-- aussi possible: get a la place de post. pour avoir un beau lien -->
+
+<center>
+<img class = 'img' align="middle" src="mars.png" height=120 width=158><b><font face="Calibri" size="20px", class='titre_principal'>Mars Climate Database v6.1 : The Web Interface</font></b><br>
+<a href="http://www-mars.lmd.jussieu.fr/mars/info_web/index.html"><font face="Calibri" size="3px"  class='little_thing'>[Information]</font></a>
+<a href="./diapo.html"><font face="Calibri" size="3px"  class='little_thing'>[Gallery]</font></a>
+<a href="mailto:forget@lmd.jussieu.fr,millour@lmd.jussieu.fr"><font title='Contact forget@lmd.jussieu.fr or millour@lmd.jussieu.fr' face="Calibri" size="3px" class='little_thing'>[Report issue]</font></a>
+<a href="credit.html"><font face="Calibri" size="3px" class='little_thing'>[Credit]</font></a>
+<a href="http://www-mars.lmd.jussieu.fr/mars/info_web/index.html#quotes"><font face="Calibri" size="3px" class='little_thing'>[How to cite the MCD]</font></a><br>
+<a href="#" onclick="window.location.reload(true);"></a><br>
+</center>
+
+
+<table align="center" border="1" width="1400" class='table'>
+<!--<table align="center" border="1" width="1400" style="width:100%" class='table'>-->
+<!--<table align="center" border="1" width="1200" bgcolor="#F6CECE">-->
+
+
+
+<tr>
+
+<td align="center" style = "vertical-align:top" >
+
+<br>
+<b><font face="Calibri" size="5px" class='titre_table'>VARIABLE(S) TO DISPLAY OR DOWNLOAD</font></b><br /><br />
+<br />
+<font class='font_mars' face="Calibri" size="3px" >Variable 1 </font> <select class = "drop_down_menu" name="var1">
+<option value="t"     selected>Temperature (K)</option>
+<script src="listvar.js"></script></select><br /><br />
+<font class='font_mars' face="Calibri" size="3px">Variable 2 </font> <select class = "drop_down_menu" name="var2">
+<option value="none"  selected>(None)</option>
+<option value="t"     >Temperature (K)</option>
+<script src="listvar.js"></script></select><br /><br />
+<font class='font_mars' face="Calibri" size="3px" >Variable 3 </font> <select class = "drop_down_menu" name="var3">
+<option value="none"  selected>(None)</option>
+<option value="t"     >Temperature (K)</option>
+<script src="listvar.js"></script></select><br /><br />
+<font class='font_mars' face="Calibri" size="3px" >Variable 4 </font> <select class = "drop_down_menu" name="var4">
+<option value="none"  selected>(None)</option>
+<option value="t"     >Temperature (K)</option>
+<script src="listvar.js"></script></select><br /><br />
+
+</td>
+
+<td align="center" style = "vertical-align:top" >
+<br>
+<b><font face="Calibri" size="5px" class='titre_table'>TIME COORDINATES</font></b><br /> 
+<br />
+<input type="radio" name="datekeyhtml" value="1" checked>
+<b><font face="Calibri" size="5px" class='font_mars'>MARS date</font></b> 
+<a href="http://www-mars.lmd.jussieu.fr/mars/time/solar_longitude.html">
+<font title="The solar longitude Ls is the Mars-Sun angle, measured from the Northern Hemisphere spring equinox where Ls=0." face="Calibri" size="3px"  class='font_mars'>Solar longitude (Ls)</font></a>
+<input class='fill_form'type="text" size="3px" name="ls" > <font class='font_mars' face="Calibri" size="3px" >degrees</font><br />
+<a href="http://www-mars.lmd.jussieu.fr/mars/time/local_time.html">
+<font title="Martian hours are defined as lasting 1/24th of a sol. (1 sol = 88775 seconds), Local True Solar Time, related to the position of the sun in the sky. Noon occurs when the sun is highest in the sky, at local true solar time LTST=12.0 martian hours. 
+FOR MAPS, Local Time is the time at longitude zero (Universal Time: UTC)" class='font_mars' face="Calibri" size="3px" ">    Local Time</font></a>
+<input class='fill_form' type="text" size="3px" name="localtime" value="0."> <font class='font_mars' face="Calibri" size="3px" >Martian hour</font><br />
+<font class='little_thing' face="Calibri" size="3px" >Ls and LT: write a value (or) a range 'val1 val2' (or) 'all'</font><br />
+<br />
+<input type="radio" name="datekeyhtml" value="0">
+<b><font face="Calibri" size="5px" class='font_earth'>EARTH date</font></b> 
+<font class='font_earth' face="Calibri" size="3px" >YY / MM / DD @ hh:mm:ss UTC</font></b><br />
+<input class='fill_form' type="text" size="3px" name="year"> <font class='font_earth' face="Calibri" size="3px">/</font> <input class='fill_form' type="text" size="1px" name="month"> <font  class='font_earth' face="Calibri" size="3px" >/</font> <input class='fill_form' type="text" size="1px" name="day"> <font class='font_earth' face="Calibri" size="3px" >@</font>
+<input class='fill_form' type="text" size="1" name="hours"><font class='font_earth' face="Calibri" size="3px" >:</font><input class='fill_form' type="text" size="1" name="minutes"><font  class='font_earth' face="Calibri" size="3px">:</font><input class='fill_form' type="text" size="1" name="seconds"><br />
+<input class='fill_earth' type="button" value="Use Earth date to calculate Mars Ls" onClick="Convert2Ls();"><br /><br />
+<font class='font_earth' face="Calibri" size="3px" >Earth Julian Date</font> <input type="text" size="10" name="julian" readonly="readonly" class='display_earth'><br />
+<font class='font_earth' face="Calibri" size="3px" >Mars MY-sol</font> <input type="text" size="1" name="martianyear" readonly="readonly" class='display_earth'">
+<input type="text" size="2" name="sol" readonly="readonly" class='display_earth'><br />
+</td>
+
+
+
+<td align="center" style = "vertical-align:top">
+
+<br>
+<b><font class='titre_table' face="Calibri" size="5px">SPATIAL COORDINATES</font></b><br />
+<font class='little_thing' face="Calibri" size="3px" >write a value (or) a range 'val1 val2' (or) 'all'</font><br />
+<ul>
+<font class='font_mars' face="Calibri" size="3px" >Latitude</font> <input class='fill_form' type="text" size="7" name="latitude" value="0."> <font class='font_mars' face="Calibri" size="3px">degree North</font><br />
+<font class='font_mars' face="Calibri" size="3px" >Longitude</font> <input class='fill_form' type="text" size="7" name="longitude" value="0."> <font class='font_mars' face="Calibri" size="3px" >degree East</font><br />
+<font class='font_mars' face="Calibri" size="3px" >Altitude</font> <input class='fill_form' type="text" size="9" name="altitude" value="10."> <select class='drop_down_menu' name="zkey">
+<option value="3" selected>m above surface</option>
+<option value="2"         >m above "sea level"</option>
+<option value="1"         >m from Mars center</option>
+<option value="4"         >Pa (pressure level)</option>
+<!--
+<option value="5"         >above 3396 km from Mars center</option>
+-->
+</select>
+</ul>
+<br /><br /><br />
+
+<u><i><font title="Choosing a spacecraft will change your time and space settings to the corresponding landing site and date."class='font_mars' face="Calibri" size="3px" >Spacecraft landing site & date </font></i></u>
+<select onchange='changespacecraft()' class='drop_down_menu' name="spacecraft">
+<option value="none" selected>(None)</option>
+<option value="equator"         >Now at equator!</option>
+<option value="Zhurong"         >Zhurong</option>
+<option value="Perseverance"         >Perseverance</option>
+<option value="Insight"         >InSight</option>
+<option value="Curiosity"         >Curiosity</option>
+<option value="Phoenix"         >Phoenix</option>
+<option value="Opportunity"         >Opportunity</option>
+<option value="Spirit"        >Spirit</option>
+<option value="Pathfinder"        >Pathfinder</option>
+<option value="Viking1"        >Viking 1</option>
+<option value="Viking2"        >Viking 2</option>
+</select></li>
+
+
+
+<script>
+
+function changespacecraft()
+ {
+
+if(document.calendar.spacecraft.value === 'equator') {
+      DefaultDateValues();DefaultTimeValues();Convert2Ls();PlaceValues(0.0,0.0)
+        }
+if(document.calendar.spacecraft.value === 'Zhurong') {
+      DateAndTimeValues(2021,5,14,23,18,0);Convert2Ls();MapValues(109.92,25.07);PlaceValues(109.92,25.07)
+        }       
+if(document.calendar.spacecraft.value === 'Perseverance') {
+      DateAndTimeValues(2021,2,18,20,55,0);Convert2Ls();MapValues(77.45,18.44);PlaceValues(77.45,18.44)
+        }         
+if(document.calendar.spacecraft.value === 'Insight') {
+      DateAndTimeValues(2018,11,26,19,44,52);Convert2Ls();MapValues(135.6,4.5);PlaceValues(135.6,4.5)
+        }        
+if(document.calendar.spacecraft.value === 'Curiosity') {
+      DateAndTimeValues(2012,8,6,05,17,57);Convert2Ls();MapValues(137.4,-4.6);PlaceValues(137.4,-4.6)
+        }
+if(document.calendar.spacecraft.value === 'Phoenix') {
+      DateAndTimeValues(2008,5,25,23,38,23);Convert2Ls();MapValues(234.25,68.22);PlaceValues(234.25,68.22)
+        }
+if(document.calendar.spacecraft.value === 'Opportunity') {
+      DateAndTimeValues(2004,1,25,4,55,0);Convert2Ls();MapValues(354.47,-1.95);PlaceValues(354.47,-1.95)
+        }        
+if(document.calendar.spacecraft.value === 'Spirit') {
+      DateAndTimeValues(2004,1,4,4,26,0);Convert2Ls();MapValues(175.48,-14.57);PlaceValues(175.48,-14.57)
+        }                
+if(document.calendar.spacecraft.value === 'Pathfinder') {
+      DateAndTimeValues(1997,7,4,16,56,55);Convert2Ls();MapValues(-33.22,19.13);PlaceValues(-33.22,19.13)
+        }  
+if(document.calendar.spacecraft.value === 'Viking1') {
+      DateAndTimeValues(1976,7,20,11,53,6);Convert2Ls();MapValues(-49.97,22.48);PlaceValues(-49.97,22.48)
+        } 
+if(document.calendar.spacecraft.value === 'Viking2') {
+      DateAndTimeValues(1976,9,3,22,58,20);Convert2Ls();MapValues(-225.74,47.97);PlaceValues(-225.74,47.97)
+        }               
+        
+                       
+  }
+
+</script>
+
+</td>
+
+
+<tr>
+<td align="left" style = "vertical-align:top">
+
+<br>
+&nbsp;&nbsp;<b><font face="Calibri" size="5px" class='titre_table'>CUSTOMIZE DATA REQUEST</font></b><br />
+<ul>
+<!--
+<li> MCD version
+<input type="radio" name="betatest" value="on"  checked /> 6.1
+</span>
+</li>
+-->
+<li>
+<font face="Calibri" size="3px" class='main_font'>Same</font> <a href="http://www-mars.lmd.jussieu.fr/mars/time/local_time.html" ><font title="Martian hours are defined as lasting 1/24th of a sol. (1 sol = 88775 seconds), Local True Solar Time, related to the position of the sun in the sky. Noon occurs when the sun is highest in the sky, at local true solar time LTST=12.0 martian hours." class='main_font' face="Calibri" size="3px">localtime</font></a> <font class='main_font' face="Calibri" size="3px">everywhere</font>
+<input class='main_font' type="radio" name="isfixedlt" value="off" checked /> <font class='main_font' face="Calibri" size="3px" >off</font>
+<input class='main_font' type="radio" name="isfixedlt" value="on"          /> <font class='main_font' face="Calibri" size="3px" >on</font>
+</br></br>
+<li>
+<a href="http://www-mars.lmd.jussieu.fr/mars/info_web/index.html#scenarios"><font title="Extreme UV controls the heating of the atmosphere above 120 km (3 scenarios are provided : min solar, ave solar and max solar). Suspended dust governs the variability in the Martian atmosphere (clim corresponds to a standard year, warm to a dusty atmosphere, cold to a clear atmosphere, dust storm is a global dust storm scenario and MY24-33 represent specific Martian years)." class='main_font' face="Calibri" size="3px">Dust/EUV scenario</font></a> 
+<select class='drop_down_menu' name="dust">
+<option value="1" selected>climatology ave solar</option>
+<option value="2"         >climatology min solar</option>
+<option value="3"         >climatology max solar</option>
+<option value="4"         >dust storm min solar</option>
+<option value="5"         >dust storm ave solar</option>
+<option value="6"         >dust storm max solar</option>
+<option value="7"         >warm (dusty, max solar)</option>
+<option value="8"         >cold (low dust, min solar)</option>
+<option value="24"        >Martian Year 24 </option>
+<option value="25"        >Martian Year 25 </option>
+<option value="26"        >Martian Year 26 </option>
+<option value="27"        >Martian Year 27 </option>
+<option value="28"        >Martian Year 28 </option>
+<option value="29"        >Martian Year 29 </option>
+<option value="30"        >Martian Year 30 </option>
+<option value="31"        >Martian Year 31 </option>
+<option value="32"        >Martian Year 32 </option>
+<option value="33"        >Martian Year 33 </option>
+</select></li></br>
+<li><a href="http://www-mars.lmd.jussieu.fr/mars/info_web/index.html#highres"><font title="The HR mode combines high resolution (32 pixels/degree) MOLA topography and the smoothed VL1 pressure records to compute surface pressure as accurately as possible and high resolution values of atmospheric variables." class='main_font' face="Calibri" size="3px" >High-resolution topography</font></a> 
+<input class='main_font' type="radio" name="hrkey" value="0"          /> <font class='main_font' face="Calibri" size="3px">off</font>
+<input class='main_font' type="radio" name="hrkey" value="1"  checked /> <font class='main_font' face="Calibri" size="3px" >on</font>
+<!--<input type="checkbox" name="hrkey" value="1" checked /> -->
+</li></br>
+<li> <font class='main_font' face="Calibri" size="3px" >Averaging</font> 
+<input class='main_font' type="radio" name="averaging" value="off"  checked /> <font class='main_font' face="Calibri" size="3px" >off</font>
+<input class='main_font' type="radio" name="averaging" value="lon"          /> <font class='main_font' face="Calibri" size="3px" >zonal</font>
+<input class='main_font' type="radio" name="averaging" value="loct"         /> <font class='main_font' face="Calibri" size="3px" >diurnal</font>
+</li>
+<!--
+<li> Zonal averaging (for 2D plots)
+<input type="radio" name="zonmean" value="off" checked /> off
+<input type="radio" name="zonmean" value="on"          /> on
+</li>
+<li> Diurnal averaging (for 2D plots)
+<input type="radio" name="diumean" value="off" checked /> off
+<input type="radio" name="diumean" value="on"          /> on
+</li>
+-->
+</ul>
+</td>
+
+
+<td  align='left' style = "vertical-align:top" >
+<br>
+&nbsp;&nbsp;<b><font face="Calibri" size="5px" class='titre_table'>CUSTOMIZE FIGURES</font></b><br />
+<ul>
+<li> <font class='main_font' face="Calibri" size="3px">Figure format</font>
+<input type="radio" name="dpi" value="80" checked> <font class='main_font' face="Calibri" size="3px">PNG</font>
+<input type="radio" name="dpi" value="160"> <font class='main_font' face="Calibri" size="3px">PNG hi-res</font>
+<input type="radio" name="dpi" value="eps"> <font class='main_font' face="Calibri" size="3px">EPS</font>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+</li>
+<li> <font class='main_font' face="Calibri" size="3px" >[1D] Log(values)</font>
+<input type="radio" name="islog" value="off" checked /> <font class='main_font' face="Calibri" size="3px" >off</font>
+<input type="radio" name="islog" value="on" /> <font class='main_font' face="Calibri" size="3px" >on</font>
+</li>
+<li> <font class='main_font' face="Calibri" size="3px">[2D] Colormap</font>
+<select class='drop_down_menu' name="colorm">
+<option value="jet"       selected>blue green yellow red</option>
+<option value="Greys"             >grey</option>
+<option value="Blues"             >blue</option>
+<option value="YlOrRd"            >yellow orange red</option>
+<option value="spectral"          >rainbow</option>
+<option value="hot"               >black red yellow</option>
+<option value="RdBu_r"            >blue white red</option>
+<option value="RdBu"              >red white blue</option>
+</select>
+</li>
+<li> <font class='main_font' face="Calibri" size="3px">[2D] Values range</font> <input class='fill_form' type="text" size="2" name="minval"> <font class='main_font' face="Calibri" size="3px">to</font>  <input class='fill_form' type="text" size="2" name="maxval">
+</li>
+<li> <font class='main_font' face="Calibri" size="3px">[2D map] </font>
+<font class='main_font' face="Calibri" size="3px">View</font>
+<select class='drop_down_menu' onchange='displayproj()' name="proj">
+<!--<option value=""          selected>flat (cylindrical lat-lon)</option>-->
+<option value="cyl" selected>flat</option>
+<option value="nsper">sphere</option>
+<option value="npstere">N pole</option>
+<option value="spstere">S pole</option>
+<!--<option value="robin">map</option>-->
+<!--<option value="laea">laea</option>-->
+</select>
+<font class='main_font' face="Calibri" size="3px" id='projalt'>from alt</font><font class='main_font' face="Calibri" size="3px" id='projN1'> from 90 &#176 North to </font> <font class='main_font' face="Calibri" size="3px" id='projS1'> from -90 &#176 North to </font>
+<input class='fill_form' type="text" size="3" name="palt" id='projalt1'> <font class='main_font' face="Calibri" size="3px" id='projalt2'> km </font> <font id='projlonlat' class='main_font' face="Calibri" size="3px" >; lon </font><input id='projlonlat1' class='fill_form' type="text" size="1" name="plon"> <font id='projlonlat2' class='main_font' face="Calibri" size="3px" >; lat </font> <input id='projlonlat3' class='fill_form' type="text" size="1" name="plat"> 
+<font class='main_font' face="Calibri" size="3px" id='projN2'> &#176 North</font>
+<font class='main_font' face="Calibri" size="3px" id='projS2'> &#176 North</font>
+
+<script>
+
+function displayproj()
+ {
+
+if (document.calendar.proj.value === 'nsper') {
+  document.getElementById("projlonlat").style.display = "";  
+  document.getElementById("projlonlat1").style.display = "";  
+  document.getElementById("projlonlat2").style.display = "";  
+  document.getElementById("projlonlat3").style.display = ""; 
+  document.getElementById("projalt").style.display = ""; 
+  document.getElementById("projalt1").style.display = ""; 
+  document.getElementById("projalt2").style.display = ""; 
+  document.getElementById("projN1").style.display = "none"; 
+  document.getElementById("projN2").style.display = "none"; 
+  document.getElementById("projS1").style.display = "none"; 
+  document.getElementById("projS2").style.display = "none"; 
+   
+        }
+        
+else if(document.calendar.proj.value === 'npstere') {
+  document.getElementById("projlonlat").style.display = "none";  
+  document.getElementById("projlonlat1").style.display = "none";  
+  document.getElementById("projlonlat2").style.display = "none";  
+  document.getElementById("projlonlat3").style.display = ""; 
+  document.getElementById("projalt").style.display = "none"; 
+  document.getElementById("projalt1").style.display = "none"; 
+  document.getElementById("projalt2").style.display = "none";
+  document.getElementById("projN1").style.display = ""; 
+  document.getElementById("projN2").style.display = ""; 
+  document.getElementById("projS1").style.display = "none"; 
+  document.getElementById("projS2").style.display = "none"; 
+       } 
+
+
+else if(document.calendar.proj.value === 'spstere') {
+  document.getElementById("projlonlat").style.display = "none";  
+  document.getElementById("projlonlat1").style.display = "none";  
+  document.getElementById("projlonlat2").style.display = "none";  
+  document.getElementById("projlonlat3").style.display = ""; 
+  document.getElementById("projalt").style.display = "none"; 
+  document.getElementById("projalt1").style.display = "none"; 
+  document.getElementById("projalt2").style.display = "none";
+  document.getElementById("projN1").style.display = "none"; 
+  document.getElementById("projN2").style.display = "none"; 
+  document.getElementById("projS1").style.display = ""; 
+  document.getElementById("projS2").style.display = ""; 
+             
+       }
+
+
+else {
+  document.getElementById("projlonlat").style.display = "none";  
+  document.getElementById("projlonlat1").style.display = "none";  
+  document.getElementById("projlonlat2").style.display = "none";  
+  document.getElementById("projlonlat3").style.display = "none"; 
+  document.getElementById("projalt").style.display = "none"; 
+  document.getElementById("projalt1").style.display = "none"; 
+  document.getElementById("projalt2").style.display = "none";
+  document.getElementById("projN1").style.display = "none"; 
+  document.getElementById("projN2").style.display = "none"; 
+  document.getElementById("projS1").style.display = "none"; 
+  document.getElementById("projS2").style.display = "none"; 
+  }
+  
+  }
+              
+
+</script>
+
+
+
+</li>
+<li> <font class='main_font' face="Calibri" size="3px" >[2D map] Transparency (%) </font>  <input class='fill_form' type="text" size="1" name="trans"></li>
+<li> <font class='main_font' face="Calibri" size="3px" >[2D map] Wind vectors </font>
+<input type="radio" name="iswind" value="off" checked /> <font class='main_font' face="Calibri" size="3px" >off </font>
+<input type="radio" name="iswind" value="on"          /> <font class='main_font' face="Calibri" size="3px" >on </font>
+</li>
+<li> <font class='main_font' face="Calibri" size="3px">[2D map]</font> <input class='fill_form' type="checkbox" name="istherepoint" value="on" /> <font class='main_font' face="Calibri" size="3px" >Add marker at lat </font> <input class='fill_form' type="text" size="1" name="latpoint"> <font class='main_font' face="Calibri" size="3px" >lon </font> <input class='fill_form'  type="text" size="1" name="lonpoint">
+</ul>
+</td>
+
+<td align="center">
+<input class='big_button' type="button" value="SUBMIT" style="font-weight:bold;font-size:230%;" onClick="submit_form()"/><br /><br /><br />
+<input class='little_button' type="button" value="RESET" style="font-size: 100%;  "onClick="window.location.reload(true);"/>
+</td>
+
+</table>
+
+<center>
+<!--<a href="index.html"><img src="paysage_mars.png" height=130 style="width:100%"></a><br>-->
+<a href="index.html"><img src="Mars_day.jpg" width="1400" id="imgClickAndChange"></a><br>
+
+
+</center>
+
+
+</body>
+</html>
+
+<!--
+<input type="checkbox" name="maths" value="on" /> Maths
+-->
