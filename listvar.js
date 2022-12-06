@@ -21,7 +21,7 @@ document.write('\
 <option value="ps"                          >Surface pressure (Pa)</option>\
 <option value="ps_gcm"                      >GCM surface pressure (Pa)</option>\
 <option value="potential_temp"              >Potential temperature (K) (reference pressure=610Pa)</option>\
-<option value="w_l"                         >Vertical wind component (m/s) (Up-Down)</option>\
+<option value="w_l"                         >Downward vertical wind component (m/s)</option>\
 <option value="zonal_slope_wind"            >Zonal slope wind component (m/s) (HR mode only)</option>\
 <option value="merid_slope_wind"            >Meridional slope wind component (m/s) (HR mode only)</option>\
 <option value="rmsps"                       >Surface pressure RMS day to day variations (Pa)</option>\
